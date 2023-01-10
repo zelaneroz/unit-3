@@ -7,4 +7,3 @@ def test_a_to_t():
 def test_non_protein():
     assert translate_dna("Z") == "not valid"
 
-# ASSERT
