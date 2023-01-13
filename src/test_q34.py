@@ -1,4 +1,4 @@
-import q34_oop
+from q34_oop import quiz34
 import pytest
 #
 # def test_valid():
@@ -9,7 +9,6 @@ import pytest
 # def test_invalid():
 #     with pytest.raises(ValueError):
 #         to_roman(101)
-
-object1 = q34_oop.quiz34()
-def test_valid(object1):
-    assert object1.to_roman(num=37)=='XXXVII'
+def test_valid():
+    object1 = quiz34()
+    assert object1.to_roman(37)=='XXXVII'
