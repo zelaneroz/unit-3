@@ -1,25 +1,29 @@
 class Account:
-    def __init__(self,balance:int,holder_name:str,holder_email:str,number:list):
-        self.balance=balance
-        self.holder_name=holder_name
-        self.holder_email=holder_email
-        self.number=number
-    def get_account_no(self)->str:
+    def __init__(self):
+        self.balance=0
+        self.holder_name=""
+        self.holder_email=""
+        self.number=[]
 
-    def set_holder_name(self)->str:
-        #When called, the attribute name must be filled
-        #Then return string f"Holder's name set to {name}"
-        #If holder_name is a list???? Value Error
-        #If holder name is not a string, Type Error
-    def set_holder_email(selfs)->str:
-        # When called, the attribute email must be filled
-        # Then return string f"Holder's email set to {email}"
+    # def get_account_no(self)->str:
+
+    def set_holder_name(self,name:str)->str:
+        if not isinstance(name,str):
+            raise ValueError("Error. Input must be a string.")
+        self.holder_name=name
+        return f"Holder's name set to {self.holder_name}"
+
+    def set_holder_email(self,email:str)->str:
+        self.holder_email=email
+        return f"Holder's email set to {self.holder_email}"
+
     def get_balance(self)->int:
-        #return self.balance
+        return self.balance
 
-    def deposit(self)->str:
-        #Add number to self.balance.
-        #Output f"New balance: {balance} USD"
+    def deposit(self,amount:int)->str:
+        self.balance+=amount
+        return f"New balance: {self.balance} USD"
 
-
-
+# case1 = Account()
+# solution = case1.set_holder_name(["zelan@gmail.com"])
+# print(solution)
