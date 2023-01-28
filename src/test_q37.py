@@ -1,15 +1,28 @@
 import pytest
 from q37 import AccountingProgram
 
-def test_empty_account():
-    ac=AccountingProgram()
-    assert ac.principal==0
-    assert ac.rate==0
-    assert ac.years==0
+def test_calculate_interest():
+    program = AccountingProgram()
+    program.set_principal(1000)
+    program.set_rate(0.05)
+    program.set_years(10)
+    interest = program.calculate_interest()
+    assert interest == 1628.89
 
-def test_set_values():
-    ac=AccountingProgram()
-    assert ac.set_rate(3)=="Rate set to 3"
-    assert ac.set_years(2)=="Number of years set to 2"
-    assert ac.set_principal(5)=="Principal value set to 5"
-    assert ac.calculate_interest()=="Calculated interest is 80"
+def test_principal_validation():
+    program = AccountingProgram()
+    with pytest.raises(ValueError) as err:
+        program.set_principal(-1000)
+    assert "Principal should be greater than zero" in str(err.value)
+
+def test_rate_validation():
+    program = AccountingProgram()
+    with pytest.raises(ValueError) as err:
+        program.set_rate(-0.05)
+    assert "Interest rate should be greater than zero" in str(err.value)
+
+def test_years_validation():
+    program = AccountingProgram()
+    with pytest.raises(ValueError) as err:
+        program.set_years(-10)
+    assert "Years should be greater than zero" in str(err.value)
