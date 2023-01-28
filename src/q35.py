@@ -1,11 +1,17 @@
+import random
+
 class Account:
     def __init__(self):
         self.balance=0
         self.holder_name=""
         self.holder_email=""
-        self.number=[]
+        m,n,o=random.randint(100,999),random.randint(10000,99999),random.randint(0,9)
+        self.number = [m,n,o]
+        #Make 3 randomized number: 999, 99999,9
+        # Number Digit: ###-#####-#
 
-    # def get_account_no(self)->str:
+    def get_account_no(self)->str:
+        return f"{self.number[0]}-{self.number[1]}-{self.number[2]}"
 
     def set_holder_name(self,name:str)->str:
         if not isinstance(name,str):
@@ -25,5 +31,6 @@ class Account:
         return f"New balance: {self.balance} USD"
 
 # case1 = Account()
-# solution = case1.set_holder_name(["zelan@gmail.com"])
+# solution = case1.get_account_no()
 # print(solution)
+# print(solution.split("-"))

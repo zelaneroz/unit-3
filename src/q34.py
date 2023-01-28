@@ -17,8 +17,3 @@ def to_roman(num:int)->str:
                 break
         i-=1
     return converted
-
-
-print(to_roman(37))
-
-

@@ -7,8 +7,8 @@ def test_empty_account():
     assert bk.holder_name == ""
     assert bk.holder_email == ""
     assert isinstance(bk.number, list)
-    #number = bk.get_account_no().split("-")
-    # assert  len(number)==3 and len(number[0])==3 and len(number[1])==5 and len(number[2])==1
+    number = bk.get_account_no().split("-")
+    assert len(number)==3 and len(number[0])==3 and len(number[1])==5 and len(number[2])==1
 
 def test_create_account():
     bk = Account()
@@ -19,8 +19,8 @@ def test_create_account():
     assert bk.get_balance() == 100
 
 def test_value_errors():
-      bk = Account()
-      with pytest.raises(ValueError):
-          bk.set_holder_email(email="bob@bob@bob")
-          bk.set_holder_name(name=["Bob"])
-          bk.set_holder_name(name=100)
+    bk = Account()
+    with pytest.raises(ValueError):
+        bk.set_holder_email(email="bob@bob@bob")
+        bk.set_holder_name(name=["Bob"])
+        bk.set_holder_name(name=100)

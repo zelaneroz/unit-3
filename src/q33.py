@@ -1,4 +1,4 @@
-def mystery(list1:list,list2:list):
+def mystery(list1, list2):
     output=[]
     for i in list1:
         for j in list2:
