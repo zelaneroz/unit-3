@@ -1,7 +1,8 @@
 from kivymd.app import MDApp
-class hw2App(MDApp):
+
+class example1(MDApp):
     def build(self):
         return
 
-test = hw2App()
+test=example1()
 test.run()
