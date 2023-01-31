@@ -1,8 +1,10 @@
 from kivymd.app import MDApp
 
-class example1(MDApp):
+class ex2(MDApp):
     def build(self):
         return
+    def close(self):
+        exit()
 
-test = example1()
+test = ex2()
 test.run()
