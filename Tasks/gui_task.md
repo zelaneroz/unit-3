@@ -235,3 +235,82 @@ Screen:
 
 
 # Task 2 <a name="task_2"></a>
+### Python
+```pycon
+from kivymd.app import MDApp
+class task2(MDApp):
+    def build(self):
+        return
+
+    def set_input(self):
+        self.value = int(self.root.ids.user_input.text)
+
+    def to_bits(self):
+        output = f"{self.value*8} Bit\n{self.value/125} Kilobits\n{self.value/125000} Megabits\n{self.value/125000000} Gigabit\n{self.value/125000000000} Terabit\n{self.value/(1.25*10*1*14)} Petabit\n{self.value/(1.25*10**17)} Exabit"
+        self.root.ids.output.text = output
+
+    def to_byte(self):
+        output = f"{self.value/8} Bit\n{self.value/8000} Kilobyte\n{self.value/0.000008} Megabytes\n{self.value/0.000000008} Gigabytes\n{self.value/0.000000000008} Terabytes\n{self.value/0.000000000008} Petabytes\n{self.value/0.000000000008} Exabytes"
+        self.root.ids.output.text = output
+
+test = task2()
+test.run()
+```
+### Kivy
+```.kv
+Screen:
+    size: 500,500
+
+    MDBoxLayout:
+        pos_hint:{"center_x":.5,"center_y":.5}
+        size_hint: .6,.6
+        orientation: "vertical"
+
+        MDLabel:
+            text: "Digital Layout (Bits & Bytes Converter)"
+            font_size: "60"
+            halign: "center"
+            bold: True
+        MDTextField:
+            id: user_input
+            hint_text: "Enter value"
+            font_size: 40
+            on_text:
+                app.set_input()
+        MDBoxLayout:
+            pos_hint:{"center_x":.5}
+            orientation: "horizontal"
+            pos_hint:{"center_x":.5}
+            padding:5,5,5,5
+
+            MDRaisedButton:
+                md_bg_color: "red"
+                text: "Bits to Bytes"
+                pos_hint:{"center_x":.5}
+                padding:5,5,5,5
+                on_release:
+                    app.to_byte()
+
+            MDRaisedButton:
+                text: "Bytes to Bits"
+                md_bg_color: "blue"
+                padding:5,5,5,5
+                pos_hint:{"center_x":.5}
+                on_release:
+                    app.to_bits()
+
+        MDLabel:
+            id: output
+            text: ""
+            halign:"center"
+            font_size: "40px"
+```
+### Output
+![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_p3JaDZ/Screen Shot 2023-01-31 at 8.32.19 PM.png)
+![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_r5iD7r/Screen Shot 2023-01-31 at 8.32.40 PM.png)
+
+### UML Diagram
+
+### Flowchart
+
+### Wireframe
