@@ -5,7 +5,7 @@ class ex3(MDApp):
         return
 
     def change_author(self,name):
-        self.root.ids.title.text = f"Author {name}"
+        self.root.ids.text.text = f"Author {name}"
 
 test = ex3()
 test.run()
