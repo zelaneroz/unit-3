@@ -1,0 +1,55 @@
+ScreenManager:
+    id: scr_manager
+
+    IntroScreen:
+        name: "IntroScreen"
+
+    PrepareDough:
+        name: "PrepareDough"
+
+    PrebakeDough:
+        name: "PrebakeDough"
+
+<IntroScreen>:
+    MDCard:
+        size_hint: .7,.7
+        pos_hint: {"center_x":.5,"center_y":.5}
+        md_bg_color: .4,.4,.4,.5
+        orientation: "vertical"
+        MDLabel:
+            text:"Pizza Tutorial"
+            font_style: "H1"
+            halign: "center"
+        FitImage:
+            size_hint: 1,.7
+            source:"pizza.jpeg"
+        MDRaisedButton:
+            text:"Next Step"
+            on_press: root.parent.current = "PrepareDough"
+            pos_hint:{"center_x":.5}
+
+<PrepareDough>:
+    MDCard:
+      size_hint: .7,.7
+      pos_hint: {"center_x":.5,"center_y":.5}
+      md_bg_color: .4,.4,.4,.5
+      orientation: "vertical"
+
+      MDLabel:
+        text:"Prepare Dough"
+        font_style: "H5"
+        halign: "center"
+        size_hint: 1,.1
+        color: "#FFFFFF"
+
+      MDBoxLayout:
+        MDRaisedButton:
+            size_hint: .5,1
+            text:"Previous Step"
+            on_press: root.parent.current="IntroPizza"
+        MDRaisedButton:
+            size_hint: .5,1
+            text:"Next Step"
+            on_press: root.parent.current = "PrebakeDough"
+
+<PrebakeDough>
