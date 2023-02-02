@@ -1,8 +1,17 @@
 from kivymd.app import MDApp
 
-class layout_q39(MDApp):
+class q39(MDApp):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-    
+        self.count = 0
+
     def build(self):
-        retu
+        return
+    def add_count(self):
+        self.count +=1
+        self.root.ids.counter.text = f"Counter {self.count}"
+
+
+test = q39()
+test.run()
+
