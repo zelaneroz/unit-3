@@ -1,33 +1,34 @@
 class CompoundInterest:
-    def __init__(self):
-        self.principal, self.rate, self.numyears=0,0,0
+    def __init__(self,principal,rate,num_years):
+        self.principal=principal
+        self.rate=rate
+        self.numyears=num_years
 
     def calculate_interest(self):
-        interest=self.principal*(1+self.rate)**self.numyears
+        interest=round(self.principal*(1+self.rate)**self.numyears, 2)
         return interest
 
 class AccountingProgram(CompoundInterest):
     def __init__(self):
-        self.principal=0
-        self.rate=0
-        self.numyears=0
+        self.compound=CompoundInterest(0,0,0)
 
-    def set_principal(self,principal:int):
+    def set_principal(self,principal):
         if principal<0:
             raise ValueError("Principal should be greater than zero")
-        self.principal=principal
+        else:
+            self.compound.principal=principal
 
     def set_rate(self,rate:int):
         if rate<0:
             raise ValueError("Interest rate should be greater than zero")
-        self.rate=rate
+        else:
+            self.compound.rate=rate
 
     def set_years(self,years:int):
         if years<0:
             raise ValueError("Years should be greater than zero")
-        self.numyears=years
+        else:
+            self.compound.numyears=years
 
-    #def calculate_interest(self):
-        #gets the Compound Interest method calculate_interest
-
-
+    def calculate_interest(self):
+        return self.compound.calculate_interest()

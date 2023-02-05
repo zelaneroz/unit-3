@@ -1,16 +1,16 @@
-MDScreen:
+Screen:
     MDBoxLayout:
-        id: main1
+        id:main1
         pos_hint:{"center_x":0.5, "center_y":0.5}
         size_hint:1,1
         md_bg_color: "white"
         orientation: "vertical"
 
         MDLabel:
-            id: txt
+            id:txt
             text: "Zelan"
             text_color: "black"
-            theme_text_color: 'Custom'
+            theme_text_color: "Custom"
             halign: "center"
             font_style: "H1"
 
@@ -20,7 +20,4 @@ MDScreen:
             pos_hint: {"corner_x":.5}
             md_bg_color: "blue"
             text_color: "white"
-            on_release:
-                app.change_color()
-
-
+            on_release: app.change_color()
