@@ -90,6 +90,11 @@ The Traveling Salesman Problem (TSP) tries to find the best route to visit a cer
 *Character Count: 500*
 
 **The Solution**
+* Brute Force: Try all possible routes and then choose the shortest; this becomes unfeasible as the number of cities increases.
+* Approximation Algorithms: Provides a solution close to the optimal solution, but not really the shortest.
+* Optimization Algorithms: Use mathematical formulas and computer algorithms to find the shortest route (ex. Branch & Bound method)
+* Nearest Neighbor: Choose a random city then go for the closest unvisited city. Once all cities have been visited, return to the first one.  
 
+*Character Count: 500*
 
 

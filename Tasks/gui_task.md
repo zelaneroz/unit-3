@@ -20,9 +20,8 @@ Screen:
         halign: "center"
         font_size: "34pt"
 ```
-### **Output**
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_e2989g/Screen Shot 2023-01-31 at 11.43.08 AM.png)
-
+### Output
+![](src/media/ex1.png)
 
 # Example 2 <a name="ex2"></a>
 ### **Python**
@@ -66,7 +65,7 @@ Screen:
 ```
 
 ### **Output**
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_sIZeNo/Screen Shot 2023-01-31 at 11.48.29 AM.png)
+![](src/media/ex2.png)
 
 # Example 3 <a name="ex3"></a>
 ### **Python**
@@ -139,10 +138,8 @@ Screen:
 ```
 
 ### **Output**
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_4zl6s3/Screen Shot 2023-01-31 at 12.52.17 PM.png)
-
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_3AhB2D/Screen Shot 2023-01-31 at 12.52.37 PM.png)
-
+![](src/media/ex3_1.png)
+![](src/media/ex3_2.png)
 
 # Task 1 <a name="task_1"></a>
 ### **Python**
@@ -221,17 +218,9 @@ Screen:
 ```
 
 ### **Output**
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_0ZbXFI/Screen Shot 2023-01-31 at 4.04.57 PM.png)
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_EcwSjC/Screen Shot 2023-01-31 at 4.09.34 PM.png)
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_GOtX3X/Screen Shot 2023-01-31 at 4.09.12 PM.png)
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_CNXyxC/Screen Shot 2023-01-31 at 4.07.59 PM.png)
-
-### UML Diagram
-
-### Flowchart
-
-### Wireframe
-
+![](src/media/t1_1.png)
+![](src/media/t1_2.png)
+![](src/media/t1_3.png)
 
 
 # Task 2 <a name="task_2"></a>
@@ -306,11 +295,6 @@ Screen:
             font_size: "40px"
 ```
 ### Output
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_p3JaDZ/Screen Shot 2023-01-31 at 8.32.19 PM.png)
-![](../../../../../var/folders/y0/hqzvd0zj4gd8wqkm8l5zck3c0000gn/T/TemporaryItems/NSIRD_screencaptureui_r5iD7r/Screen Shot 2023-01-31 at 8.32.40 PM.png)
+![](src/media/t2_1.png)
+![](src/media/t2_2.png)
 
-### UML Diagram
-
-### Flowchart
-
-### Wireframe
