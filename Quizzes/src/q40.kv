@@ -3,13 +3,13 @@ Screen:
         id:main1
         pos_hint:{"center_x":0.5, "center_y":0.5}
         size_hint:1,1
-        md_bg_color: "white"
+        md_bg_color: "black"
         orientation: "vertical"
 
         MDLabel:
             id:txt
             text: "Zelan"
-            text_color: "black"
+            text_color: "white"
             theme_text_color: "Custom"
             halign: "center"
             font_style: "H1"
@@ -18,6 +18,6 @@ Screen:
             id:btn1
             text: "Dark Mode"
             pos_hint: {"corner_x":.5}
-            md_bg_color: "blue"
+            md_bg_color: "red"
             text_color: "white"
-            on_release: app.change_color()
+            on_release: app.color()
