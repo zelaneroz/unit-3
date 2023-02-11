@@ -13,11 +13,7 @@ query = f"""CREATE TABLE users(
     username text not null
 )"""
 
-# execute the query you wrote
 cursor.execute(query)
-#step 4. save the changes
-# it's like github. you have to commit your changes to become permanent.
 connection.commit()
 connection.close()
-# if you wont close your databaes, it will stay open in the memory run
 
