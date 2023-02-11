@@ -13,6 +13,9 @@ class RegistrationScreen(MDScreen):
     def try_register(self):
         print("User tried to register")
         self.parent.current = "SignupScreen"
+    def login_btn(self):
+        print("User tried to register")
+        self.parent.current = "MainScreen"
 class MainScreen(MDScreen):
     pass
 class spentio(MDApp):

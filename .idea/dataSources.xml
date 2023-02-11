@@ -70,5 +70,12 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Project/src/login_database.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="spentio.db" uuid="a5d3cf2d-c50f-406e-9423-a0bc11b37f3f">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Project/src/spentio.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

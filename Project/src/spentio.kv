@@ -70,9 +70,82 @@ ScreenManager:
                     on_press: root.register_btn()
 
 <RegistrationScreen>:
-    MDLabel:
-        text: "Register"
-        halign: "center"
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#FFF0EB"
+        Image:
+            source: 'media/logo3.png'
+            width: 50
+            allow_stretch: False
+            size_hint_y:.15
+            pos_hint: {"center_x":.5,"center_y":.2}
+        MDLabel:
+            text: 'spent.io'
+            size_hint_y:.15
+            bold: True
+            halign: "center"
+            font_size: "120px"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDCard:
+            size_hint: .7,.7
+            pos_hint: {"center_x":.5,"center_y":.5}
+            orientation: "vertical"
+            border_radius: 40
+            radius: [40]
+            MDBoxLayout:
+                orientation: "vertical"
+                pos_hint: {"center_x":.5,"center_y":.5}
+                MDLabel:
+                    text: "Register new account"
+                    halign: "left"
+                    text_color: "#F08DA9"
+                    bold: True
+                    size_hint_y:.15
+                    font_size: "50px"
+                    pos_hint: {"center_x":.55, "center_y":.5}
+                MDTextField:
+                    id:uname
+                    hint_text: "Enter username"
+                    size_hint: .7, .1
+                    hint_font_size: "12px"
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDTextField:
+                    id: email
+                    hint_text: "Enter email"
+                    hint_font_size: "10px"
+                    password: True
+                    size_hint: .7,.1
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDTextField:
+                    id:pass1
+                    hint_text: "Enter password"
+                    size_hint: .7, .1
+                    hint_font_size: "10px"
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDTextField:
+                    id: pass2
+                    hint_text: "Confirm password"
+                    password: True
+                    size_hint: .7,.1
+                    hint_font_size: "12px"
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDLabel:
+                    text: ""
+                    size_hint_y: .05
+                MDFlatButton:
+                    text: "Register"
+                    md_bg_color:"#F08DA9"
+                    pos_hint: {"center_x":.5, "center_y":.2}
+                    size_hint: .3,.05
+                    on_press: root.parent.curent="MainScreen"
+                    on_release: root.parent.curent="MainScreen"
+                MDTextButton:
+                    text: "Already have an account? Log in here"
+                    custom_color: "#F08DA9"
+                    size_hint: 1, .1
+                    halign: "center"
+                    pos_hint: {"center_x":0.5,"center_y":.5}
+                    on_press: root.login_btn()
 <MainScreen>:
     MDLabel:
         text: "Main"
