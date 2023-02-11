@@ -37,15 +37,17 @@ class LoginScreen(MDScreen):
         pass_entered = self.ids.passwd.text
         db = database_handler(namedb="login_database.db")
         db.test_login(email=email_entered,paswd=pass_entered)
+
+    def try_register(self):
+        print("User tried to register")
+        self.parent.current = "RegistrationScreen"
         #print("User tried to login")
         #print(f"Username: {self.ids.uname.text}\nPassword: {self.ids.passwd.text}")
 class RegistrationScreen(MDScreen):
     def try_register(self):
         print("User tried to register")
-        self.parent.current = "SignupScreen"
+        self.parent.current = "RegistrationScreen"
 
-class FullIMage(Image):
-    pass
 class login(MDApp):
     def build(self):
         return

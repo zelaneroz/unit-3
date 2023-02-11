@@ -1,7 +1,5 @@
 # Unit 3. Expenses Tracker App for Ms. Emmy Abella 
 
-**Table of Contents**
-[Criteria A: Planning](#Criteria_A:_Planning)
 
 # Criteria A: Planning
 ## Problem Definition
@@ -28,7 +26,22 @@ Considering the budgetary constrains of the client and the hardware requirements
 
 ## Success Criteria
 - listed in the form of bullet points
+
+
 # Criteria B: Design
+## Record of Tasks
+| Task No | Planned Action                  | Planned Outcome                                                                                                                                                                | Time estimate | Target completion date | Criterion |
+|---------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
+| 1       | Identify & interview the client |                                                                                                                                                                           | 6 min         | Feb 9                  | A|
+| 2       | Write the problem context       | Establish the problem identified in a clear and concise manner. The problem definition must include who the client is, what the client wants, and indicate a possible solution. | 15 min        | Feb 9                  | A         |
+| 3       | Write the Design Statement      | Explain in a concise and clear manner the purpose of the project to the client                                                                                                 | 5 min         | Feb 9                  | A         | 
+| 4       | Draw a system diagram           |                                                                                                                                                                                | 10 min        | Feb 10                 | A         |
+| 5       | Draw a UML Diagram              |                                                                                                                                                                                | 20 min        | Feb 10                 | A         |
+| 6       | Draw Wireframes                 |                                                                                                                                                                                | 45 min        | Feb 10                 | B         |
+| 7       | Code User Interface             |                                                                                                                                                                                | 5 hours       | Feb 11                 | C         |
+
+
+
 ## Test Plan
 ## Diagrams
 # Criteria C: Development

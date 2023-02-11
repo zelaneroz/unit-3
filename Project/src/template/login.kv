@@ -7,9 +7,6 @@ ScreenManager:
 
 
 <LoginScreen>:
-    Image:
-        source: 'logo.png'
-        size: self.texture_size
     MDCard:
         size_hint: .6,.8
         pos_hint: {"center_x":.5,"center_y":.5}
@@ -33,23 +30,22 @@ ScreenManager:
             size_hint: .7,.25
             pos_hint: {"center_x":.5}
         MDBoxLayout:
-            size_hint_y:.1
+            orientation: "horizontal"
+            size_hint: 1,.2
             MDRaisedButton:
                 id: login
-                text: "Login"
+                text: "Sign in"
                 md_bg_color: "#a8dadc"
                 on_press: root.try_login()
-                size_hint: .5, 1
+                size_hint: .4, 1
             MDRaisedButton:
                 id: register
-                text: "Register"
+                text: "Sign up"
                 md_bg_color: "#a8dadc"
-                size_hint: .5,1
-                on_press: root.parent.current = "RegistrationScreen"
+                on_press: root.try_register()
+                size_hint: .4, 1
 
 <RegistrationScreen>:
-    FitImage:
-        source:"library.jpeg"
     MDCard:
         size_hint: .6,.8
         pos_hint: {"center_x":.5,"center_y":.5}
@@ -86,4 +82,4 @@ ScreenManager:
                 text: "Sign Up"
                 md_bg_color: "#a8dadc"
                 size_hint: .5,1
-                on_press: root.parent.current = "RegistrationScreen"
+                on_press: root.manager.current = "RegistrationScreen"
