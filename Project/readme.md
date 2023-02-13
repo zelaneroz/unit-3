@@ -50,6 +50,7 @@ Emmy Abella Domingues is an 18-year-old IB Year 1 student from Brazil. As an int
 | 1       |         |    |                 |                |
 
 ## Diagrams
+### System Diagrams
 ### UML Diagram
 ### Wireframes
 ### Flowcharts
