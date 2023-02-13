@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect("login_database.db")
+connection = sqlite3.connect("spentio.db")
 
 #step 2 - get the cursor to the database
 cursor = connection.cursor()

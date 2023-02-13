@@ -26,17 +26,37 @@ class database_handler:
         query = f"INSERT into users VALUES('{email}','{password}','{username}')"
         self.run_query(query)
 
-    def test_login(self, email, paswd):
-        query = f"SELECT * FROM users  WHERE email = '{email}' and password='{paswd}'"
-        result = self.cursor.execute(query).fetchone()
-        print(result)
+    def test_login(self, email, passwd):
+        self.cursor.execute("SELECT * FROM users")
+        email_list,uname_list = [],[]
+        print(email)
+        for i in self.cursor.fetchall():
+            email_list.append(i[1])
+            uname_list.append(i[3])
+        print(email_list)
+        print(uname_list)
+        output=""
+        if (email in email_list or email in uname_list) and email != "":
+            self.cursor.execute(f"SELECT password FROM users where email='{email}' or username='{email}'")
+            for j in self.cursor:
+                if passwd == j[0]:
+                    output="You have successfully logged in!"
+                else:
+                    output="Incorrect Password"
+        else:
+            output="Incorrect Email"
+        print(output)
+        if output=="You have successfully logged in!":
+            return True
+
 
 class LoginScreen(MDScreen):
     def try_login(self):
         email_entered = self.ids.uname.text
         pass_entered = self.ids.passwd.text
         db = database_handler(namedb="login_database.db")
-        db.test_login(email=email_entered,paswd=pass_entered)
+        if db.test_login(email=email_entered,passwd=pass_entered)==True:
+            self.parent.current = "MainScreen"
 
     def try_register(self):
         print("User tried to register")
@@ -47,11 +67,11 @@ class RegistrationScreen(MDScreen):
     def try_register(self):
         print("User tried to register")
         self.parent.current = "RegistrationScreen"
-
+class MainScreen(MDScreen):
+    pass
 class login(MDApp):
     def build(self):
         return
-
 db = database_handler(namedb="login_database.db")
 db.create_tables()
 db.close()

@@ -59,8 +59,7 @@ ScreenManager:
                     md_bg_color:"#F08DA9"
                     pos_hint: {"center_x":.5, "center_y":.2}
                     size_hint: .3,.1
-                    on_press: root.parent.curent="MainScreen"
-                    on_release: root.parent.curent="MainScreen"
+                    on_press: root.try_login()
                 MDTextButton:
                     text: "Don't have an account? Sign up here"
                     custom_color: "#F08DA9"
@@ -113,7 +112,6 @@ ScreenManager:
                     id: email
                     hint_text: "Enter email"
                     hint_font_size: "10px"
-                    password: True
                     size_hint: .7,.1
                     pos_hint: {"center_x":.5,"center_y":.5}
                 MDTextField:
@@ -121,6 +119,7 @@ ScreenManager:
                     hint_text: "Enter password"
                     size_hint: .7, .1
                     hint_font_size: "10px"
+                    password: True
                     pos_hint: {"center_x":.5,"center_y":.5}
                 MDTextField:
                     id: pass2
@@ -137,8 +136,7 @@ ScreenManager:
                     md_bg_color:"#F08DA9"
                     pos_hint: {"center_x":.5, "center_y":.2}
                     size_hint: .3,.05
-                    on_press: root.parent.curent="MainScreen"
-                    on_release: root.parent.curent="MainScreen"
+                    on_press: root.try_register()
                 MDTextButton:
                     text: "Already have an account? Log in here"
                     custom_color: "#F08DA9"

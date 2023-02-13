@@ -5,6 +5,9 @@ ScreenManager:
     RegistrationScreen:
         name: "RegistrationScreen"
 
+    MainScreen:
+        name: "MainScreen"
+
 
 <LoginScreen>:
     MDCard:
@@ -83,3 +86,7 @@ ScreenManager:
                 md_bg_color: "#a8dadc"
                 size_hint: .5,1
                 on_press: root.manager.current = "RegistrationScreen"
+
+<MainScreen>:
+    MDLabel:
+        text: "Main Screen"

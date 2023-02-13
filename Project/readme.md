@@ -4,46 +4,60 @@
 # Criteria A: Planning
 ## Problem Definition
 
-Emmy Abella Domingues is an 18-year-old IB Year 1 student from Brazil. As an international & boarding student in UWC ISAK Japan, money management is a major aspect of her life. Although Emmy easily keep tracks of her income or cash inflow, she finds it hard to keep track of her expenses. Specifically, she finds it difficult to note what, when, and how much she spends on. In addition, she finds it hard to visualize how large her purchases are since she spends in a currency (Japanese Yen - ¥) different to what she's used to (Brazilian Real - R$). The client, Emmy Domingues, is in need of an app that keeps track of her expenses, shows important statistics, and a built-in currency converter to help her visualize & rationalize these purchases in Brazilian Real. In addition, the client requires the app to be encrypted through a login system, for the data to be stored in a database, and for the user interface to be clear, concise, and most importantly attractive by using the client's favorite color, pink.
+Emmy Abella Domingues is an 18-year-old IB Year 1 student from Brazil. As an international & boarding student in UWC ISAK Japan, money management is a major aspect of her life. Although Emmy easily keep tracks of her income or cash inflow, she finds it hard to keep track of her expenses. Specifically, she finds it difficult to note what, when, and how much she spends on. In addition, she finds it hard to visualize how large her purchases are since she spends in a currency (Japanese Yen - ¥) different to what she's used to (Brazilian Real - R$). The client, Emmy Domingues, is in need of an app that keeps track of her expenses. In addition, the client requires the app to be encrypted through a login system, for the data to be stored in a database, and for the user interface to be clear, concise, and most importantly attractive by using the client's favorite color, pink.
 
 
-## Rationale for Proposed Solution
+## // Rationale for Proposed Solution
 - The rationale behind the choice of the proposed product must be in extended writing justifying how the choice of proposed product must be in extended writing justifying how the choice of this particular product is an effective solution.
 - Why is an app needed?
 - What are included in the app?
 - What are used in the development in the app
 
 
-Considering the client requirements, an adequate solution requires an app
-
-**Template**
-
-"""
-Considering the client requirements an adequate solution includes a low cost sensing device for humidity and temperature and a custom data script that process and anaysis the samples acquired. For a low cost sensing device an adequate alternative is the DHT11 sensor1 which is offered online for less than 5 USD and provides adequare precision and range for the client requirements (Temperature Range: 0°C to 50°C, Humidity Range: 20% to 90%). Similar devices such as the DHT22, AHT20 or the AM2301B 2 have higher specifications, however the DHT11 uses a simple serial communication (SPI) rather than more eleborated protocols such as the I2C used by the alternatives. For the range, precision and accuracy required in this applicaiton the DHT11 provides the best compromise. Connecting the DHT11 sensor to a computer requires a device that provides a Serial Port communication. A cheap and often used alternative for prototyping is the Arduino UNO microcontroller 3. "Arduino is an open-source electronics platform based on easy-to-use hardware and software"4. In additon to the low cost of the Arduino (< 6USD), this devide is programable and expandable1. Other alternatives include diffeerent versions of the original Arduino but their size and price make them a less adequate solution.
-
-Considering the budgetary constrains of the client and the hardware requirements, the software tool that I proposed for this solution is Python. Python is open source, it is mature and supported in mutiple platforms (platform-independent) including macOS, Windows, Linux and can also be used to program the Arduino microprocessor 56. In comparison to the alternative C or C++, which share similar features, Python is a High level programming language (HLL) with high abstraction 7. For example, memory management is automatic in Python whereas it is responsability of the C/C++ developer to allocate and free up memory 7, this could result in faster applications but also memory problems. In addition a HLL language will allow me and future developers extend the solution or solve issues proptly.
-"""
 
 ## Success Criteria
-- listed in the form of bullet points
+1. The solution is an application that provides a presentation of the user's expenses in a tabular format.
+2. The application is able to add, edit, or delete entries to the app's database and present these changes.
+3. The application is kept secure by embedding a log in system and a registration system to add users.
+4. The user's data of expenses are stored in a SQLLite database.
+5. The application is up to the user's visual standard by using only shades of the user's favorite color, pink.
+6. The user's expenses are categorized into Food, Transportation, Emergency & Healthcare, Leisure, and Miscellaneous. 
+7. The app logs the date of purchase based on user input, and allows the user to write a 20-character note about that expense as an option.
 
 
 # Criteria B: Design
 ## Record of Tasks
-| Task No | Planned Action                  | Planned Outcome                                                                                                                                                                | Time estimate | Target completion date | Criterion |
-|---------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
-| 1       | Identify & interview the client |                                                                                                                                                                           | 6 min         | Feb 9                  | A|
-| 2       | Write the problem context       | Establish the problem identified in a clear and concise manner. The problem definition must include who the client is, what the client wants, and indicate a possible solution. | 15 min        | Feb 9                  | A         |
-| 3       | Write the Design Statement      | Explain in a concise and clear manner the purpose of the project to the client                                                                                                 | 5 min         | Feb 9                  | A         | 
-| 4       | Draw a system diagram           |                                                                                                                                                                                | 10 min        | Feb 10                 | A         |
-| 5       | Draw a UML Diagram              |                                                                                                                                                                                | 20 min        | Feb 10                 | A         |
-| 6       | Draw Wireframes                 |                                                                                                                                                                                | 45 min        | Feb 10                 | B         |
-| 7       | Code User Interface             |                                                                                                                                                                                | 5 hours       | Feb 11                 | C         |
-
+| Task No | Planned Action                                                               | Planned Outcome                                                                                                                                                                                             | Time estimate | Target completion date | Criterion |
+|---------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
+| 1       | Identify & interview the client                                              |                                                                                                                                                                                                             | 6 min         | Feb 9                  | A         |
+| 2       | Write the problem context                                                    | Establish the problem identified in a clear and concise manner. The problem definition must include who the client is, what the client wants, and indicate a possible solution.                             | 15 min        | Feb 9                  | A         |
+| 3       | Write the Design Statement                                                   | Explain in a concise and clear manner the purpose of the project to the client                                                                                                                              | 5 min         | Feb 9                  | A         | 
+| 4       | Draw a system diagram                                                        |                                                                                                                                                                                                             | 10 min        | Feb 10                 | A         |
+| 5       | Draw a UML Diagram                                                           |                                                                                                                                                                                                             | 20 min        | Feb 10                 | A         |
+| 6       | Draw Wireframes                                                              |                                                                                                                                                                                                             | 45 min        | Feb 10                 | B         |
+| 7       | Coding Part 1. User Interface                                                |                                                                                                                                                                                                             | 3 hours       | Feb 11                 | C         |
+| 8       | Coding Part 2. Embed Database & functionalities of the log in screen.        |                                                                                                                                                                                                             | 45 min        | Feb 11                 | C         |
+| 9       | Coding Part 3. Embed Database & functionalities of the sign up screen.       |                                                                                                                                                                                                             |               | Feb 12-14              | C         |
+| 10      | Coding Part 4. Embed & present database in a tabular form in the main screen |                                                                                                                                                                                                             |               |                        | C         |
+| 11      | Coding Part 5. Additional functionalities of the main screen                 | The program should be able to allow the user to add, edit, and delete entries. These entries must meet success criteria #6 and #7.                                                                          |               |                        | C         |
+| 12      | Beta Testing                                                                 | Gauge the app's functionaly, security, and visual layout by having the client, Emmy Abella, test the app. Take notes of certain comments, suggestions, and concerns and present app amendments to the user. |               |                        | C         |
+| 13      | Beta Development       | Code changes into the app based on feedback given by client from the previous step.                                                                                                                         |               |                        | C         |
 
 
 ## Test Plan
+| Test No |Test Type|Date| Procedure       |Expected Outcome|
+|---------|---------|----|-----------------|---|
+| 1       |         |    |                 |                |
+
 ## Diagrams
+### UML Diagram
+### Wireframes
+### Flowcharts
 # Criteria C: Development
+## Existing Tools
+## Techniques Applied
+## Sources
+## Computational Thinking 
 # Criteria D: Functionality
+## Video
 
