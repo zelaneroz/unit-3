@@ -45,9 +45,10 @@ Emmy Abella Domingues is an 18-year-old IB Year 1 student from Brazil. As an int
 
 
 ## Test Plan
-| Test No |Test Type|Date| Procedure       |Expected Outcome|
-|---------|---------|----|-----------------|---|
-| 1       |         |    |                 |                |
+| Test No | Test Type                                                                                            | Date   | Procedure                                                                                                                                           | Expected Outcome                                                                                                                                                                                                                                                                                    |
+|---------|------------------------------------------------------------------------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| 2       | Functional: Test  whether the SignUp screen succeffully registers new user if all entries are valid. | Feb 20 | Run python file (spentio.py). Go to sign up screen and enter the following values: <br/>- email: bob@isak<br/>- username: bob<br/>-password: bob125 | When the database, spentio.db is checked, a new row of data can be seen. This row shows the entered email, username, and password encrypted using a certain hash.                                                                                                                                   |  
+| 3       | Functional: Test sign up screen when data inputted by user is invalid                                | Feb 20 | Run spentio.py. Navigate to the SignUp Screen. Enter the following values:<br/>-  email: bob@isak<br/>- username: bob2<br/>-password: bob125        | Once the sign up button is clicked and the user input is queried into the database, the application shows a dialog box that tells the user the exact error. In this case, since the email already exists due to the prior test step, the dialog will show "Email already exists. Please try again". |
 
 ## Diagrams
 ### System Diagrams
