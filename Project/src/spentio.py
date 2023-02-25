@@ -1,9 +1,9 @@
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 import sqlite3
+from kivymd.uix.datatables import MDDataTable
 from Lessons.secure_password import encrypt_password, check_password
 from kivymd.uix.dialog import MDDialog
-from kivy.clock import Clock
 from kivymd.uix.button import MDFlatButton
 
 class database_handler:
@@ -68,11 +68,11 @@ class LoginScreen(MDScreen):
         result = db.search(query)
         print(result)
         if len(result)==1:
-            email,uname,hashed,uname = result[0]
+            email,uname,hashed = result[0]
             if check_password(passwd,hashed):
                 print("Login successful")
-                self.parent.current = "Homescreen"
-        if db.test_login(email=uname, passwd=passwd) == True:
+                self.parent.current = "MainScreen"
+        if db.test_login(email=uname, passwd=passwd) == True or db.test_login(email,passwd)==True:
             self.parent.current = "MainScreen"
         db.close()
     def register_btn(self):
@@ -96,18 +96,17 @@ class RegistrationScreen(MDScreen):
             if not self.dialog:
                 self.dialog=MDDialog(text=out, buttons=[MDFlatButton(text="Okay", on_release=self.dialog_close)],)
             self.dialog.open()
+        out=""
+        print("Data: ", email,pass1,pass2,uname,"\n")
         for i in db.cursor.fetchall():
             email_list.append(i[0])
             uname_list.append(i[1])
         if email in email_list or uname in uname_list:
-            out = "User already exists.\n"
-            popup(out)
+            out += "User already exists.\n"
         elif email == "" or pass1 == "" or pass2 == "" or uname == "":
-            out = "Please enter required fields.\n"
-            popup(out)
+            out += "Please enter required fields.\n"
         elif pass1!=pass2:
-            out="Password does not match. Try again.\n"
-            popup(out)
+            out+="Password does not match. Try again.\n"
             self.ids.pass1.error=True
             self.ids.pass2.error = True
         else:
@@ -117,8 +116,11 @@ class RegistrationScreen(MDScreen):
             db.close()
             print("Registration completed.")
             self.parent.current = "LoginScreen"
+        popup(out)
 class MainScreen(MDScreen):
-    pass
+    passm
+
+
 class spentio(MDApp):
     def build(self):
         return
