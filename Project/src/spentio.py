@@ -5,6 +5,9 @@ from kivymd.uix.datatables import MDDataTable
 from Lessons.secure_password import encrypt_password, check_password
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
+from kivymd.uix.textfield import MDTextField
+from kivymd.uix.pickers import MDDatePicker
+from kivymd.uix.menu import MDDropdownMenu
 
 class database_handler:
     def __init__(self, namedb:str):
@@ -122,16 +125,15 @@ class MainScreen(MDScreen):
     def on_pre_enter(self, *args):
         #b4 the screen is created the code is run
         self.data_table = MDDataTable(
-            size_hint = (.8,.5),
+            size_hint = (.8,.45),
             pos_hint = {"center_x":.5, "center_y":.5},
             use_pagination = False,
             check = True,
             #title of the columns
-            column_data = [("id",40),
-                           ("Sender ID",30),
-                           ("Receiver ID",33),
-                           ("Amount",30),
-                           ("Hash",100)
+            column_data = [("No.",40),
+                           ("Date",50),
+                           ("Category",50),
+                           ("Amount",50)
                            ]
         )
         #self.data_table.bind(on_row_press = self.row_pressed) # method name change so its more easy to understand
@@ -140,16 +142,47 @@ class MainScreen(MDScreen):
         self.update()
     def check_pressed(self,table,current_row):
         print("A check mark was pressed", current_row)
-    def save(self):
+    def delete(self):
         checked_rows = self.data_table.get_row_checks()
         print(checked_rows)
         db = database_handler("spentio.db")
         for r in checked_rows:
-            id=r[o]
-            query = f"DELETE from ledger where id={id}"
+            id=r[0]
+            query = f"DELETE from ledger where Number={id}"
             db.run_query(query)
         db.close()
         self.update()
+
+    def save(self):
+        self.save_dialog = MDDialog(
+            title='Enter an Integer',
+            type='custom',
+            content_cls=MDTextField(
+                hint_text='Enter an integer',
+                input_type='number'
+            ),
+            buttons=[
+                MDFlatButton(
+                    text='CANCEL',
+                    on_release=self.close_dialog
+                ),
+                MDFlatButton(
+                    text='OK',
+                    on_release=self.get_integer
+                )
+            ]
+        )
+        self.save_dialog.open()
+
+    def close_dialog(self, obj):
+        self.save_dialog.dismiss()
+    def get_integer(self,*args):
+        integer = self.save_dialog.content_cls.text
+        if integer.isdigit():
+            print(f"The integer entered is {integer}")
+        else:
+            print("Please enter a valid integer")
+        self.save_dialog.dismiss()
 
     def update(self):
         db=database_handler("spentio.db")
@@ -158,11 +191,15 @@ class MainScreen(MDScreen):
         db.close()
         self.data_table.update_row_data(None, data)
 
+class DialogContent(MDTextField):
+    def __init__(self, int_field, calendar, **kwargs):
+        super().__init__(**kwargs)
 
+        self.int_field = int_field
+        self.calendar = calendar
 
-
-
-
+        self.add_widget(int_field)
+        self.add_widget(calendar)
 class spentio(MDApp):
     def build(self):
         return
