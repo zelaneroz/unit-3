@@ -146,10 +146,26 @@ ScreenManager:
                     pos_hint: {"center_x":0.5,"center_y":.5}
                     on_press: root.login_btn()
 <MainScreen>:
-    MDLabel:
-        text: "Main"
-        halign: "center"
     MDBoxLayout:
         orientation: "vertical"
-        MDFlatButton:
-            id: add_
+        md_bg_color: "#FFF0EB"
+        Image:
+            source: 'media/logo3.png'
+            width: 50
+            allow_stretch: False
+            size_hint_y:.15
+            pos_hint: {"center_x":.5,"center_y":.2}
+        MDLabel:
+            text: 'spent.io'
+            size_hint_y:.15
+            bold: True
+            halign: "center"
+            font_size: "120px"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDLabel:
+            text: ""
+            size_hint_y:.5
+        MDBoxLayout:
+            MDIconButton:
+                icon: 'media/bin_icon.png'
+                icon_size: '60sp'
