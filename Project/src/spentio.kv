@@ -184,3 +184,13 @@ ScreenManager:
                 icon_size: '60sp'
                 pos_hint: {"center_x":.5,"center_y":.5}
                 on_release: root.delete()
+
+<Content>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+    MDTextField:
+        id: int_input
+        hint_text: "Enter integer"

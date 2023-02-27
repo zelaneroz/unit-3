@@ -8,6 +8,7 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.pickers import MDDatePicker
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.boxlayout import MDBoxLayout
 
 class database_handler:
     def __init__(self, namedb:str):
@@ -120,6 +121,9 @@ class RegistrationScreen(MDScreen):
             print("Registration completed.")
             self.parent.current = "LoginScreen"
         popup(out)
+
+class Content(MDBoxLayout):
+    pass
 class MainScreen(MDScreen):
     data_table = None
     def on_pre_enter(self, *args):
@@ -157,10 +161,7 @@ class MainScreen(MDScreen):
         self.save_dialog = MDDialog(
             title='Enter an Integer',
             type='custom',
-            content_cls=MDTextField(
-                hint_text='Enter an integer',
-                input_type='number'
-            ),
+            content_cls=Content(),
             buttons=[
                 MDFlatButton(
                     text='CANCEL',
@@ -177,9 +178,9 @@ class MainScreen(MDScreen):
     def close_dialog(self, obj):
         self.save_dialog.dismiss()
     def get_integer(self,*args):
-        integer = self.save_dialog.content_cls.text
+        integer = self.save_dialog.content_cls.ids.int_input.text
         if integer.isdigit():
-            print(f"The integer entered is {integer}")
+            print(f"The amount entered is {integer}")
         else:
             print("Please enter a valid integer")
         self.save_dialog.dismiss()
