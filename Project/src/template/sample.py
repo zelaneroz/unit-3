@@ -1,6 +1,6 @@
 # from kivy.lang import Builder
 # from kivymd.app import MDApp
-# from kivymd.uix.pickers import MDDatePicker
+from kivymd.uix.pickers import MDDatePicker
 #
 # KV = '''
 # MDFloatLayout:
@@ -46,41 +46,77 @@
 #
 #
 # Test().run()
-
-# class Test1:
-#     def __init__(self,base):
-#         self.base=base
 #
-# class Test2(Test1):
-
-#     def __init__(self,base):
-#         super().__init__(self,base)
 #
-# t = Test1(1)
-# d = Test2(10)
-# print(d.base)
-
+#
+#
+#
+#
+#
+#
+# # class Test1:
+# #     def __init__(self,base):
+# #         self.base=base
+# #
+# # class Test2(Test1):
+#
+# #     def __init__(self,base):
+# #         super().__init__(self,base)
+# #
+# # t = Test1(1)
+# # d = Test2(10)
+# # print(d.base)
+#
+#
+# # from kivymd.app import MDApp
+# # from kivymd.uix.button import MDRectangleFlatButton
+# # from kivymd.uix.dialog import MDDialog
+# # from kivy.lang import Builder
+# # kv = '''
+# # <OtherClass>:
+# #     id: other_class
+# #
+# # <MyApp>:
+# #     MDRaisedButton:
+# #         text: "Trigger OtherClass Method"
+# #         on_press: app.trigger_method()
+# # '''
+# # Builder.load_string(kv)
+# #
+# # class OtherClass:
+# #     def some_method(self):
+# #         print("OtherClass method was called.")
+# #
+# # class MyApp(MDApp):
+# #     def build(self):
+# #         self.other_class = OtherClass()
+# #         return Builder.load_string(kv)
+# #
+# #     def trigger_method(self):
+# #         self.other_class.some_method()
+# #
+# # MyApp().run()
+#
+#
+# from kivymd.app import MDApp
+# from kivy.lang import Builder
+# from kivy.uix.boxlayout import BoxLayout
+# from kivy.properties import ObjectProperty
+# from kivymd.uix.pickers import MDDatePicker
+#
+#
+# class DatePickerScreen(BoxLayout)
 
 from kivy.lang import Builder
-
 from kivymd.app import MDApp
-from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.pickers import MDTimePicker
 
-# KV = '''
-# MDScreen:
-#
-#     MDRaisedButton:
-#         id: button
-#         text: "PRESS ME"
-#         pos_hint: {"center_x": .5, "center_y": .5}
-#         on_release: app.menu.open()
-# '''
+class sample(MDApp):
+    def get_date(self, date):
+        return date
+    def show_date_picker(self):
+        date_dialog = MDDatePicker(callback=self.get_date)
+        date_dialog.open()
 
 
-class content:
-    def __init__(self):
-        self.checker = 'flop'
-
-class cont2:
-    c = content()
-    print(c.checker)
+sample().run()
