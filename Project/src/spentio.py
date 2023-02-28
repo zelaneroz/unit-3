@@ -192,15 +192,6 @@ class MainScreen(MDScreen):
         db.close()
         self.data_table.update_row_data(None, data)
 
-class DialogContent(MDTextField):
-    def __init__(self, int_field, calendar, **kwargs):
-        super().__init__(**kwargs)
-
-        self.int_field = int_field
-        self.calendar = calendar
-
-        self.add_widget(int_field)
-        self.add_widget(calendar)
 class spentio(MDApp):
     def build(self):
         return
