@@ -9,6 +9,8 @@ from kivymd.uix.textfield import MDTextField
 from kivymd.uix.pickers import MDDatePicker
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.boxlayout import MDBoxLayout
+import time
+from datetime import datetime
 
 class database_handler:
     def __init__(self, namedb:str):
@@ -123,9 +125,15 @@ class RegistrationScreen(MDScreen):
         popup(out)
 
 class Content(MDBoxLayout):
+    def categ_pressed(self,btn_name):
+        self.btn_name= btn_name
+        MainScreen.category =btn_name
+    def get_btn(self):
+        return str(self.btn_name)
     pass
 class MainScreen(MDScreen):
     data_table = None
+    category = None
     def on_pre_enter(self, *args):
         #b4 the screen is created the code is run
         self.data_table = MDDataTable(
@@ -157,9 +165,9 @@ class MainScreen(MDScreen):
         db.close()
         self.update()
 
-    def save(self):
+    def add_popup(self):
         self.save_dialog = MDDialog(
-            title='Enter an Integer',
+            title='Add entry',
             type='custom',
             content_cls=Content(),
             buttons=[
@@ -169,7 +177,7 @@ class MainScreen(MDScreen):
                 ),
                 MDFlatButton(
                     text='OK',
-                    on_release=self.get_integer
+                    on_release=self.save
                 )
             ]
         )
@@ -177,14 +185,26 @@ class MainScreen(MDScreen):
 
     def close_dialog(self, obj):
         self.save_dialog.dismiss()
-    def get_integer(self,*args):
+    def save(self,*args):
         integer = self.save_dialog.content_cls.ids.int_input.text
+        ts = time.time()
+        date_time = datetime.fromtimestamp(ts)
+        str_date = date_time.strftime("%d %B, %Y")
+        print("Date: ", str_date)
+        category = self.category
+        print(category)
         if integer.isdigit():
             print(f"The amount entered is {integer}")
         else:
             print("Please enter a valid integer")
         self.save_dialog.dismiss()
 
+        #ADD DIALOG
+        db=database_handler("spentio.db")
+        query = f"INSERT into ledger VALUES('{str_date}','{category}','{integer}')"
+        db.run_query(query)
+        db.close()
+        self.update()
     def update(self):
         db=database_handler("spentio.db")
         query = "SELECT * from ledger"

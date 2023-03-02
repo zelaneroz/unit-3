@@ -24,7 +24,7 @@ In summary, the proposed solution is an expense tracking app that is necessary f
 3. The application is kept secure by embedding a log in system and a registration system to add users.
 4. The user's data of expenses are stored in a SQLLite database.
 5. The application is up to the user's visual standard by using only shades of the user's favorite color, pink.
-6. The user's expenses are categorized into Food, Transportation, Emergency, Leisure, and Miscellaneous. 
+6. The user's expenses are categorized into Food, Transportation, Emergency, Leisure, and Others. 
 7. The app logs the date of purchase based on user input, and allows the user to write a 20-character note about that expense as an option.
 
 

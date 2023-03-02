@@ -169,12 +169,11 @@ ScreenManager:
             size_hint_y: .15
             orientation: 'horizontal'
             pos_hint: {"center_x":.5,"center_y":.5}
-            md_bg_color: "blue"
             MDIconButton:
                 pos_hint: {"center_x":.5,"center_y":.5}
                 icon: 'media/add.png'
                 icon_size: '60sp'
-                on_release: root.save()
+                on_release: root.add_popup()
             MDIconButton:
                 pos_hint: {"center_x":.5,"center_y":.5}
                 icon: 'media/edit.png'
@@ -189,8 +188,82 @@ ScreenManager:
     orientation: "vertical"
     spacing: "12dp"
     size_hint_y: None
-    height: "200dp"
+    height: "150dp"
 
     MDTextField:
         id: int_input
-        hint_text: "Enter integer"
+        hint_text: "Enter amount"
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint: 1,.8
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb1
+                group: 'group1'
+                pos_hint: {"center_y":.5}
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Food")
+            MDLabel:
+                text: 'Food'
+                font_size: "20px"
+                pos_hint: {"center_x":.5,"center_y":.5}
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb2
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Transportation")
+            MDLabel:
+                text: 'Transportation'
+                font_size: "20px"
+                pos_hint: {"center_x":.5,"center_y":.5}
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb3
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Leisure")
+            MDLabel:
+                text: 'Leisure'
+                font_size: "20px"
+                pos_hint: {"center_x":.5,"center_y":.5}
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb4
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Emergency")
+            MDLabel:
+                text: 'Emergency'
+                pos_hint: {"center_x":.5,"center_y":.5}
+                font_size: "20px"
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb5
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Others")
+            MDLabel:
+                text: 'Others'
+                pos_hint: {"center_x":.5,"center_y":.5}
+                font_size: "20px"
