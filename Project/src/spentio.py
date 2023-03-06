@@ -5,9 +5,6 @@ from kivymd.uix.datatables import MDDataTable
 from Lessons.secure_password import encrypt_password, check_password
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.pickers import MDDatePicker
-from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.boxlayout import MDBoxLayout
 import time
 from datetime import datetime
@@ -17,11 +14,12 @@ class database_handler:
         self.connection = sqlite3.Connection(namedb)
         self.cursor = self.connection.cursor()
     def create_tables(self):
-        query = f"""CREATE TABLE if not exists users(
-        email text not null unique,
-        password text not null,
-        username text not null unique
-    )"""
+        query = f"""CREATE TABLE if not exists ledger(
+    id INTEGER primary key,
+    Date text not null,
+    Category text not null,
+    jpy integer not null,
+    brz integer not null);"""
     def run_query(self, query: str):
         self.cursor.execute(query)
         self.connection.commit()
@@ -66,21 +64,31 @@ class database_handler:
         if email=="" or pass1=="" or pass2=="" or uname=="":
             out="Please enter values."
 class LoginScreen(MDScreen):
+    dialog=None
+    def l_popup(self,out:str):
+        if not self.dialog:
+            self.dialog = MDDialog(text=out, buttons=[MDFlatButton(text="Okay", on_release=self.dialog_close)], )
+        self.dialog.open()
+    def dialog_close(self,obj):
+        self.dialog.dismiss()
+
     def try_login(self):
         uname = self.ids.uname.text
         passwd = self.ids.passwd.text
+        MainScreen.user1 = self.ids.uname.text
         query = f"SELECT * from users where uname='{uname}' or email='{uname}'"
         db = database_handler(namedb="spentio.db")
         result = db.search(query)
-        print(result)
         if len(result)==1:
             email,uname,hashed = result[0]
             if check_password(passwd,hashed):
-                print("Login successful")
-                self.parent.current = "MainScreen"
-        if db.test_login(email=uname, passwd=passwd) == True or db.test_login(email,passwd)==True:
-            self.parent.current = "MainScreen"
+                self.parent.current="MainScreen"
+            else:
+                self.l_popup("Incorrect Password. Try again.")
+
         db.close()
+        self.ids.uname.text = ''
+        self.ids.passwd.text=''
     def register_btn(self):
         self.parent.current = "RegistrationScreen"
 class RegistrationScreen(MDScreen):
@@ -88,8 +96,7 @@ class RegistrationScreen(MDScreen):
     def dialog_close(self,obj):
         self.dialog.dismiss()
     def login_btn(self):
-        print("User tried to register")
-        self.parent.current = "MainScreen"
+        self.parent.current = "LoginScreen"
     def try_register(self):
         db = database_handler(namedb="spentio.db")
         email = self.ids.email.text
@@ -98,10 +105,7 @@ class RegistrationScreen(MDScreen):
         uname = self.ids.uname.text
         db.run_query("SELECT * FROM users")
         email_list, uname_list = [], []
-        def popup(out:str):
-            if not self.dialog:
-                self.dialog=MDDialog(text=out, buttons=[MDFlatButton(text="Okay", on_release=self.dialog_close)],)
-            self.dialog.open()
+
         out=""
         print("Data: ", email,pass1,pass2,uname,"\n")
         for i in db.cursor.fetchall():
@@ -122,7 +126,12 @@ class RegistrationScreen(MDScreen):
             db.close()
             print("Registration completed.")
             self.parent.current = "LoginScreen"
+        def popup(out:str):
+            if not self.dialog:
+                self.dialog = MDDialog(text=out, buttons=[MDFlatButton(text="Okay", on_release=self.dialog_close)], )
+            self.dialog.open()
         popup(out)
+
 
 class Content(MDBoxLayout):
     def categ_pressed(self,btn_name):
@@ -130,41 +139,47 @@ class Content(MDBoxLayout):
         MainScreen.category =btn_name
     def get_btn(self):
         return str(self.btn_name)
+    def set_error_message(self):
+        MainScreen.int_input1 = self.ids.int_input.text
     pass
 class MainScreen(MDScreen):
     data_table = None
     category = None
+    int_input1 = None
+    user1 = None
+    id_edit=None
     def on_pre_enter(self, *args):
-        #b4 the screen is created the code is run
         self.data_table = MDDataTable(
             size_hint = (.8,.45),
             pos_hint = {"center_x":.5, "center_y":.5},
-            use_pagination = False,
+            use_pagination = True,
             check = True,
             #title of the columns
             column_data = [("No.",40),
                            ("Date",50),
                            ("Category",50),
-                           ("Amount",50)
+                           ("Amount (JPY)",50),
+                           ("Amount (BRL)", 50)
                            ]
         )
         #self.data_table.bind(on_row_press = self.row_pressed) # method name change so its more easy to understand
         self.data_table.bind(on_check_press = self.check_pressed)
         self.add_widget(self.data_table) #add table to the GUI
-        self.update()
+        self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
+    def logout(self):
+        self.parent.current='LoginScreen'
     def check_pressed(self,table,current_row):
-        print("A check mark was pressed", current_row)
+        return current_row
     def delete(self):
         checked_rows = self.data_table.get_row_checks()
         print(checked_rows)
         db = database_handler("spentio.db")
         for r in checked_rows:
             id=r[0]
-            query = f"DELETE from ledger where Number={id}"
+            query = f"DELETE from ledger where id={id}"
             db.run_query(query)
         db.close()
-        self.update()
-
+        self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
     def add_popup(self):
         self.save_dialog = MDDialog(
             title='Add entry',
@@ -187,33 +202,70 @@ class MainScreen(MDScreen):
         self.save_dialog.dismiss()
     def save(self,*args):
         integer = self.save_dialog.content_cls.ids.int_input.text
-        ts = time.time()
-        date_time = datetime.fromtimestamp(ts)
+        date_time = datetime.fromtimestamp(time.time())
         str_date = date_time.strftime("%d %B, %Y")
-        print("Date: ", str_date)
         category = self.category
-        print(category)
-        if integer.isdigit():
-            print(f"The amount entered is {integer}")
-        else:
-            print("Please enter a valid integer")
-        self.save_dialog.dismiss()
-
-        #ADD DIALOG
-        db=database_handler("spentio.db")
-        query = f"INSERT into ledger VALUES('{str_date}','{category}','{integer}')"
+        print(integer,'\n\n',type(integer))
+        db = database_handler("spentio.db")
+        query = f"INSERT into ledger (date, category, jpy,brz,user) VALUES('{str_date}','{category}',{int(integer)},{int(integer)*.038},'{self.user1}')"
         db.run_query(query)
         db.close()
-        self.update()
-    def update(self):
+
+        self.save_dialog.dismiss()
+        self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
+    def update(self,query):
         db=database_handler("spentio.db")
-        query = "SELECT * from ledger"
+        #query = "SELECT * from ledger"
         data = db.search(query)
         db.close()
         self.data_table.update_row_data(None, data)
 
+    def spinner_clicked(self,value):
+        print(f"\nSpinner selected {value}")
+        if value=='All':
+            self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
+        else:
+            self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}' and Category='{value}'")
+
+    def edit_entry(self):
+        print("Edit is triggered")
+        # integer = self.save_dialog.content_cls.ids.int_input.text
+        # category = self.category
+        # db = database_handler("spentio.db")
+        # query = f"UPDATE ledger set category='{category}',jpy={int(integer)},brz={int(integer)*.038} where id={self.id_edit} and user='{self.user1}'"
+        # db.run_query(query)
+        # db.close()
+        # self.save_dialog.dismiss()
+        # self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
+
+    def close_dialog_1(self,obj):
+        self.edit_dialog.dismiss()
+    def edit_trig(self):
+        checked_rows = self.data_table.get_row_checks()
+        if len(checked_rows) ==1:
+            self.id_edit = checked_rows[0][0]
+            self.edit_dialog = MDDialog(
+                title='Edit entry',
+                type='custom',
+                content_cls=Content(),
+                buttons=[
+                    MDFlatButton(
+                        text='CANCEL',
+                        on_release=self.close_dialog_1
+                    ),
+                    MDFlatButton(
+                        text='OK',
+                        on_release=self.edit_entry
+                    )
+                ]
+            )
+            self.edit_dialog.open()
+
+
+
 class spentio(MDApp):
     def build(self):
+        self.theme_cls.primary_palette = "Pink"
         return
 
 db = database_handler(namedb="spentio.db")

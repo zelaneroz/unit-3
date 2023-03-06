@@ -13,4 +13,4 @@ def check_password(user_password,hashed):
 
 hash = encrypt_password("hello")
 print(hash)
-print(check_password("hello1213",hash))
+print(check_password("hello",hash))

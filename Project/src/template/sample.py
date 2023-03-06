@@ -1,13 +1,26 @@
-# from kivy.lang import Builder
 # from kivymd.app import MDApp
-# from kivymd.uix.pickers import MDTimePicker
+# from kivymd.uix.menu import MDDropdownMenu,MDDropdownItem
+# from kivymd.uix.floatlayout import MDFloatLayout
+# from kivy.lang import Builder
 #
-# class sample(MDApp):
-#     def get_date(self, date):
-#         return date
-#     def show_date_picker(self):
-#         date_dialog = MDDatePicker(callback=self.get_date)
-#         date_dialog.open()
+# KV = '''
+# MDFloatLayout:
+#     MDDropDownItem:
+#         id: dropdown_item
+#         text: 'A'
+#         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+#         on_release: dropdown.open()
 #
+#     MDDropDownMenu:
+#         id: dropdown
+#         items: [{'text': 'A'}, {'text': 'B'}, {'text': 'C'}]
+#         width_mult: 4
+# '''
 #
-# sample().run()
+# class DropdownButton(MDApp):
+#     def build(self):
+#         return Builder.load_string(KV)
+#
+# DropdownButton().run()
+integer = 'abc'
+print(integer.isdigit())

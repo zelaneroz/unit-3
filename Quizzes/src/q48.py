@@ -5,6 +5,8 @@ connection = sqlite3.connect("bitcoin_exchange.db")
 cursor = connection.cursor()
 query = "SELECT * FROM ledger"
 result = cursor.execute(query).fetchall()
+res2 = cursor.execute("SELECT MAX(id) FROM ledger").fetchone()[0]
+
 connection.close()
 
 for i in result:
