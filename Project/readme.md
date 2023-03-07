@@ -78,6 +78,8 @@ In summary, the proposed solution is an expense tracking app that is necessary f
 
 ## Diagrams
 ### System Diagrams
+![](src/media/system_diagram.jpg)
+*Fig. 1 System Diagram for the proposed solution.*
 ### UML Diagram
 ### ER Diagram
 ### Wireframes

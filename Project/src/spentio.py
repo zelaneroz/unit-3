@@ -107,6 +107,7 @@ class RegistrationScreen(MDScreen):
         email_list, uname_list = [], []
 
         out=""
+        print("Data: ", email,pass1,pass2,uname,"\n")
         for i in db.cursor.fetchall():
             email_list.append(i[0])
             uname_list.append(i[1])
@@ -123,6 +124,7 @@ class RegistrationScreen(MDScreen):
             query = f"INSERT into users values ('{email}', '{uname}','{hash}')"
             db.run_query(query)
             db.close()
+            print("Registration completed.")
             self.parent.current = "LoginScreen"
         def popup(out:str):
             if not self.dialog:
