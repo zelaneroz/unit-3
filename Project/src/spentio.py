@@ -107,7 +107,6 @@ class RegistrationScreen(MDScreen):
         email_list, uname_list = [], []
 
         out=""
-        print("Data: ", email,pass1,pass2,uname,"\n")
         for i in db.cursor.fetchall():
             email_list.append(i[0])
             uname_list.append(i[1])
@@ -124,7 +123,6 @@ class RegistrationScreen(MDScreen):
             query = f"INSERT into users values ('{email}', '{uname}','{hash}')"
             db.run_query(query)
             db.close()
-            print("Registration completed.")
             self.parent.current = "LoginScreen"
         def popup(out:str):
             if not self.dialog:
@@ -227,16 +225,16 @@ class MainScreen(MDScreen):
         else:
             self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}' and Category='{value}'")
 
-    def edit_entry(self):
+    def edit_entry(self,*args):
         print("Edit is triggered")
-        # integer = self.save_dialog.content_cls.ids.int_input.text
-        # category = self.category
-        # db = database_handler("spentio.db")
-        # query = f"UPDATE ledger set category='{category}',jpy={int(integer)},brz={int(integer)*.038} where id={self.id_edit} and user='{self.user1}'"
-        # db.run_query(query)
-        # db.close()
-        # self.save_dialog.dismiss()
-        # self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
+        integer = self.edit_dialog.content_cls.ids.int_input.text
+        category = self.category
+        db = database_handler("spentio.db")
+        query = f"UPDATE ledger set category='{category}',jpy={int(integer)},brz={int(integer)*.038} where id={self.id_edit} and user='{self.user1}'"
+        db.run_query(query)
+        db.close()
+        self.edit_dialog.dismiss()
+        self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
 
     def close_dialog_1(self,obj):
         self.edit_dialog.dismiss()
