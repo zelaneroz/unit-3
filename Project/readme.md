@@ -9,16 +9,17 @@ Emmy Abella Domingues is an 18-year-old IB Year 1 student from Brazil. As an int
 The client, Emmy Domingues, is in need of an app that keeps track of her expenses. In addition, the client requires the app to be encrypted through a login system, for the data to be stored in a database, and for the user interface to be clear, concise, and most importantly attractive by using the client's favorite color, pink.
 
 ## Design Statement
-I will design and develop a digital expenses ledger for Emmy Abella Domingues da Silva who is struggling to keep track of her expenses as an international student. The proposed solution is an application programmed using the Python programming language, KivyMD for the Graphic User Interface (GUI) construction, and SQLite for local database. The program will be developed and completed in a span of 4 weeks and will be evaluated based on the success criteria stated prior to this statement; the success criteria are objectives to be met by the developer approved by the client based on their needs and preferences.
+I will design and develop a digital expenses ledger for Emmy Abella Domingues da Silva who is struggling to keep track of her expenses as an international student. The proposed solution is an application programmed using the Python programming language, KivyMD for the Graphic User Interface (GUI) construction, and SQLite for local database[3]. The program will be developed and completed in a span of 4 weeks and will be evaluated based on the success criteria stated prior to this statement; the success criteria are objectives to be met by the developer approved by the client based on their needs and preferences.
 
 ## Rationale for Proposed Solution
 The proposed solution is an expense tracking application that allows users to keep track of their expenses, categorize them into the client's main expenditure type (Food, Transportation, Emergency & Healthcare, Leisure, and Miscellaneous), and monitor their spending. The app is necessary for people who want to stay on top of their finances and make informed financial decisions. The app provides users with a comprehensive overview of their spending habits, which is crucial for budgeting, planning, and saving.
 
 The app includes a login & register system to provide an added layer of security by ensuring that only authorized users can access the app and its data. It also ensures that the user's data is private and personal to the authorized user, protecting sensitive information such as financial data, personal details, and transaction history. The user interface uses a color scheme that only includes colors in the shade of pink, as per request of the client. The interface is clear, concise, and attractive, making it easy for users to navigate and use the app. The app allows the user to add entries as the expense tracking app's basic functionality. In addition, it allows users to edit and delete entries just in case the user inputs an entry wrongly the first time.
 
-The developer shall use Python, a popular programming language widely used in the development of web applications, scientific computing, and data analysis. The developer chose Python as it is a versatile language that is easy to learn and has a large community of developers who contribute to its development. Along with Python is kivyMD, a Python-based library use for developing user interfaces. The developer chose kivyMD because it is open source and it is a popular choice for app development among the Python developers community, due to its apparent simplicity, flexibility, and scalability. kivyMD provides a wide range of widgets, animations, and effects, making it easy to develop attractive and responsive user interfaces. Lastly, SQLite is chosen for the application's database management system due to its simplicity, reliability, and portability. SQLite offers a lightweight database management system and can be integrated with Python. SQLite is also scalable, meaning it can handle large amounts of data and is suitable for developing an expense tracking app. It is self-contained thus a separate server is not required.
+The developer shall use Python, a popular programming language widely used in the development of web applications, scientific computing, and data analysis[1]. The developer chose Python as it is a versatile language that is easy to learn and has a large community of developers who contribute to its development. Along with Python is kivyMD, a Python-based library use for developing user interfaces. The developer chose kivyMD because it is open source and it is a popular choice for app development among the Python developers community, due to its apparent simplicity, flexibility, and scalability. kivyMD provides a wide range of widgets, animations, and effects, making it easy to develop attractive and responsive user interfaces[2]. Lastly, SQLite is chosen for the application's database management system due to its simplicity, reliability, and portability. SQLite offers a lightweight database management system and can be integrated with Python. SQLite is also scalable, meaning it can handle large amounts of data and is suitable for developing an expense tracking app. It is self-contained thus a separate server is not required.
 
 In summary, the proposed solution is an expense tracking app that is necessary for people who want to stay on top of their finances. The app includes a login system, a database management system, a user interface, expense tracking, encryption, and personalization. Python, kivyMD, and SQLite are the best choices for developing the app because of their simplicity, flexibility, and reliability.
+
 
 ## Success Criteria
 1. The solution is an application that provides a presentation of the user's expenses in a tabular format.
@@ -40,7 +41,9 @@ In summary, the proposed solution is an expense tracking app that is necessary f
 ### Wireframes
 ![](src/media/wireframe.jpg)
 
-*Fig. 2 Wireframe of the spent.io app*
+*Fig. 2 Wireframe of the spent.io app created on Adobe XD*
+
+
 ### UML Diagram
 ![](src/media/uml_diagram.png)
 
@@ -49,10 +52,26 @@ In summary, the proposed solution is an expense tracking app that is necessary f
 Figure 3 shows the classes and methods found in each class used to develop the application. The classes exhibit in either three parent classes found in the KivyMD Library: MDApp, MDScreen, and MDBoxLayout. All subclasses inherit methods and attributes from these parent classes.
 
 ### ER Diagram
+![](src/media/er_diagram.jpg)
 
+*Fig 4. ER diagram of the spent.io app database spentio.db(SQLite).*
+
+Figure 4 shows the different entities involved in the app's database and how these different entities relate to each other. Here, we can see that the SQLite database has two tables called ledger and users. The users database stores all the user's account information (hashed password, email, and username) and for each user registered in the users table, there are entries in the ledger table that belong only to that specific user.
 
 
 ### Flowcharts
+**Registration System**
+*Fig 5. Flowchart of the spent.io app entry editing algorithm*
+
+**Add Entry**
+
+*Fig 6. Flowchart of the spent.io app entry addition algorithm*
+**Entry Editing**
+![](src/media/fc_1.jpg)
+
+*Fig 7. Flowchart of the spent.io app entry editing algorithm*
+
+
 
 ## Record of Tasks
 | Task No | Planned Action                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Planned Outcome                                                                                                                                                                                                                                                                                                                                                                                     | Time estimate | Target completion date | Criterion |
@@ -111,37 +130,107 @@ Figure 3 shows the classes and methods found in each class used to develop the a
 | 14      | Functional: Delete Entry                                                                                  | Mar 1  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
 | 15      | Functional: Edit Entry                                                                                    | Mar 1  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
 | 16      | Functional: Validate new/edited entry                                                                     | Mar 2  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
-| 17      | Functional: View by Category button                                                                       |        |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
+| 17      | Functional: View by Category button                                                                       | Mar 3  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
 | 18      | Functional: Logout                                                                                        | Mar 3  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
-| 19      | Top-down Integration Testing                                                                              |        |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
-| 20      | Bottom-up Integration Testing                                                                             |        |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
-| 21      | Non-functional: Code Review. Review if the code has adequate comments, function ames, and variable names. |        |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
+| 19      | Top-down Integration Testing                                                                              | Mar 5  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
+| 20      | Bottom-up Integration Testing                                                                             | Mar 6  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
+| 21      | Non-functional: Code Review. Review if the code has adequate comments, function ames, and variable names. | Mar 8  |                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                            |
 
 
 
 # Criteria C: Development
 ## Existing Tools
-| **Software/Development Tools** |**Coding Structure Tools**|**Libraries**|
-|--------------------------------|--------------------------|-------------|
-| Pycharm                        |                          |             |
-| Python                         |                          |             |
-| SQLite                         |                          |             |
-| ChatGPT                        |                          |             |
+**Software Development Tools**
+* Pycharm
+* Python 
+* SQLite
+* CHatGPt
+
+**Python Libraries/Modules**
+* KivyMD - a collection of widgets to create Graphic User Interfaces using Python
+* Time -  a Python module that provides various time-related functions
+* Datetime - a Python module that supplies classes for manipulating dates & times
+* Passlib - a password hashing library for Python 2&3 
+
 ## Techniques Applied
-1. Object Oriented Programming (OOP): Classes, Inheritance
+1. Object Oriented Programming (OOP): Classes, Inheritance, Methods, Attributes
 2. Object Relation Mapping (ORM): SQLAlchemy
-2. SQLite Database
-3. KivyMD Library
+3. KivyMD: Dialog, BoxLayout, Label, TextField, Checker, Spinner, Buttons
+4. Password Encryption: Passlib CryptContext class (sha256 hashing algorithm)
 3. Variables
 4. For loops
-5. if statements
+5. if, elif, and else statements
 6. Database interaction
 7. Text Formatting
 7. Functions
+8. Calling KivyMd components using id
 
-## Computational Thinking 
-## Sources
+## Computational Thinking - sqlite console
+**users table**
+```pycon
+
+```
+
+**ledger table**
+```pycon
+
+```
+
+## Computational Thinking - .py
+**Connecting to SQL**
+```pycon
+
+```
+
+**Password Encryption**
+```pycon
+
+```
+
+**Register (w/ Validation)**
+```pycon
+
+```
+
+**Log in (w/ Validation)**
+```pycon
+
+```
+**Add Entry**
+```pycon
+
+```
+
+**Edit Entry**
+```pycon
+
+```
+
+**Delete Entry**
+```pycon
+
+```
+
+**Log out**
+```pycon
+
+```
+
+
+
+## References
+
+[^1]: Python , "https://www.python.org/."
+
+[^2]: KivyMD , "https://kivymd.readthedocs.io/en/1.1.1/."
+
+[^3]: SQLite , "https://www.sqlite.org/index.html."
+
+[^4]: Codemy , "https://www.youtube.com/watch?v=tToJBfDgCsc&ab_channel=Codemy.com".
+
+[^5]: Datetime , "https://docs.python.org/3/library/datetime.html"
 
 # Criteria D: Functionality
 ## Video
+https://drive.google.com/file/d/1zlYApceWcf5DnEFbrumAMSg-eP5M6G76/view?usp=sharing 
 

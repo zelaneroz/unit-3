@@ -63,7 +63,6 @@ ScreenManager:
                     pos_hint: {"center_x":.5, "center_y":.2}
                     size_hint: .3,.1
                     on_press:
-                        passwd.password = False if passwd.password is True else True
                         root.try_login()
                 MDTextButton:
                     text: "Don't have an account? Sign up here"
@@ -113,18 +112,12 @@ ScreenManager:
                     size_hint: .7, .1
                     hint_font_size: "12px"
                     pos_hint: {"center_x":.5,"center_y":.5}
-                    required: True
-                    helper_text_mode: "on_error"
-                    helper_text: "Enter text"
                 MDTextField:
                     id: email
                     hint_text: "Enter email"
                     hint_font_size: "10px"
                     size_hint: .7,.1
                     pos_hint: {"center_x":.5,"center_y":.5}
-                    required: True
-                    helper_text_mode: "on_error"
-                    helper_text: "Enter text"
                 MDTextField:
                     id:pass1
                     hint_text: "Enter password"
@@ -132,19 +125,15 @@ ScreenManager:
                     hint_font_size: "10px"
                     password: True
                     pos_hint: {"center_x":.5,"center_y":.5}
-                    required: True
-                    helper_text_mode: "on_error"
-                    helper_text: "Enter text"
                 MDTextField:
                     id: pass2
                     hint_text: "Confirm password"
+                    helper_text: "Password must be at least 8 characters long"
+                    helper_text_mode: "on_error"
                     password: True
                     size_hint: .7,.1
                     hint_font_size: "12px"
                     pos_hint: {"center_x":.5,"center_y":.5}
-                    required: True
-                    helper_text_mode: "on_error"
-                    helper_text: "Enter text"
                 MDLabel:
                     text: ""
                     size_hint_y: .05
@@ -189,7 +178,7 @@ ScreenManager:
                 pos_hint: {"center_x":.5,"center_y":.5}
                 icon: 'media/add.png'
                 icon_size: '60sp'
-                on_release: root.add_popup()
+                on_release: root.save_popup()
             MDIconButton:
                 icon: 'media/edit.png'
                 icon_size: '60sp'
@@ -215,7 +204,7 @@ ScreenManager:
                 icon: 'media/logout.png'
                 icon_size: '60sp'
                 pos_hint: {"center_x":.5,"center_y":.5}
-                on_release: root.logout()
+                on_release: root.logout_popup()
 
 <Content>
     orientation: "vertical"
