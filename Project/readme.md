@@ -61,11 +61,14 @@ Figure 4 shows the different entities involved in the app's database and how the
 
 ### Flowcharts
 **Registration System**
+
 *Fig 5. Flowchart of the spent.io app entry editing algorithm*
+
 
 **Add Entry**
 
 *Fig 6. Flowchart of the spent.io app entry addition algorithm*
+
 **Entry Editing**
 ![](src/media/fc_1.jpg)
 
@@ -168,54 +171,288 @@ Figure 4 shows the different entities involved in the app's database and how the
 ## Computational Thinking - sqlite console
 **users table**
 ```pycon
-
+query = f"""CREATE TABLE if not exists users(
+    id integer primary key,
+    email text not null unique,
+    password text not null,
+    username text not null
+)"""
 ```
+
+This code creates a SQLite table named "users" with four columns: "id", "email", "password", and "username". The "if not exists" clause specifies that the table should only be created if it does not already exist.
+
+The "id" column is an integer primary key, which means that it is a unique identifier for each row in the table and cannot be null. The "email" column is a text field that must not be null, and must be unique (i.e., no two rows can have the same email address). The "password" column is a text field that must not be null and will hold the hashed passwords of the users. The "username" column is a text field that must not be null, and it will hold the username of the user.
+
 
 **ledger table**
 ```pycon
-
+query = f"""CREATE TABLE if not exists ledger(
+    id INTEGER primary key,
+    Date text not null,
+    Category text not null,
+    jpy integer not null,
+    brz integer not null);"""
 ```
+This code is creating a table named ledger in a SQLite database through an SQLite Console.
+
+The CREATE TABLE command creates a new table with the specified name if it does not exist. The if not exists clause ensures that if the table already exists, the command will not throw an error.
+
+The ledger table has five columns:
+
+id: This column is an INTEGER data type and is the primary key of the table. It is used to uniquely identify each row in the table.
+Date: This column is of TEXT data type and is not allowed to be null. It will store the date associated with the transaction.
+Category: This column is of TEXT data type and is not allowed to be null. It will store the category of the transaction.
+jpy: This column is of INTEGER data type and is not allowed to be null. It will store the transaction amount in Japanese Yen.
+brz: This column is of INTEGER data type and is not allowed to be null. It will store the transaction amount converted to Brazilian Real based on a fixed exchange rate.
 
 ## Computational Thinking - .py
 **Connecting to SQL**
 ```pycon
-
+class database_handler:
+    def __init__(self, namedb:str):
+        self.connection = sqlite3.Connection(namedb)
+        self.cursor = self.connection.cursor()
 ```
+This is part of a Python class called `database_handler` which is used to create an object that allows for interaction with a SQLite database. The class has an __init__ method that takes in a parameter namedb which represents the name of the database file.
+
+Inside the `__init__` method, the sqlite3.Connection function is called to create a connection object to the database file specified by namedb. The cursor() method is then called on the connection object to create a cursor object which is used to execute SQL commands on the database. The connection and cursor objects are then saved as attributes of the database_handler object for use in other methods of the class.
 
 **Password Encryption**
 ```pycon
+from passlib.context import CryptContext
+
+pwd_config = CryptContext(schemes=["pbkdf2_sha256"],
+                            default="pbkdf2_sha256",
+                            pbkdf2_sha256__default_rounds=30000
+                            )
+
+def encrypt_password(user_password):
+    return pwd_config.encrypt(user_password)
+
+def check_password(user_password,hashed):
+    return pwd_config.verify(user_password,hashed)
 
 ```
+This code is using the Passlib library to encrypt and check passwords. Passlib provides a secure and easy-to-use framework for password hashing and authentication.
+
+The CryptContext object is created to configure the password encryption scheme. In this case, pbkdf2_sha256 is used, which is a widely accepted algorithm for password hashing. The default number of rounds used in the algorithm is set to 30000.
+
+The encrypt_password function takes a user's password as input and returns an encrypted version of the password using the CryptContext object configured earlier.
+
+The check_password function takes a user's password and the hashed password stored in the database as input. It uses the CryptContext object to verify that the user's password matches the stored hashed password.
+
+
+
 
 **Register (w/ Validation)**
 ```pycon
+    def try_register(self):
+        db = database_handler(namedb="spentio.db")
+        email = self.ids.email.text
+        pass1 = self.ids.pass1.text
+        pass2 = self.ids.pass2.text
+        uname = self.ids.uname.text
+        email_list, uname_list,out = [], [],""
+        temp_emails = db.search("SELECT email FROM users")
+        temp_unames = db.search("SELECT uname FROM users")
 
+        def popup(out:str):
+            self.dialog = MDDialog(text=out)
+            self.dialog.open()
+
+        for i in range(len(temp_unames)):
+            email_list.append(str(temp_emails[i])[2:-3])
+            uname_list.append(str(temp_unames[i])[2:-3])
+
+        if email in email_list or uname in uname_list:
+            out = "User already exists."
+        elif email == "" or pass1 == "" or pass2 == "" or uname == "":
+            out = "Please enter required fields."
+        elif len(pass1)<8:
+            self.ids.pass1.error=True
+            self.ids.pass1.helper_text="Password must be at least 8 characters"
+            out = "Password must be at least 8 characters"
+        elif pass1!=pass2:
+            out="Password does not match. Try again."
+            self.ids.pass2.error = True
+        else:
+            hash = encrypt_password(pass1)
+            query = f"INSERT into users values ('{email}', '{uname}','{hash}')"
+            db.run_query(query)
+            db.close()
+            out = "Registration completed. Please log in."
+            popup(out)
+            self.parent.current = "LoginScreen"
+        if out!="Registration completed. Please log in." or out!="":
+            popup(out)
 ```
+This is a method in a KivyMD screen class that attempts to register a user based on input data. The method first creates a connection to a SQLite database named "spentio.db" using a custom handler class. It then retrieves email and username information from the database and stores them in lists. The method checks if the email or username entered by the user already exists in the database or if any of the required fields are missing. If any of these conditions are true, an appropriate error message is assigned to the variable "out." If the password is less than eight characters or if the passwords entered do not match, an error message is displayed, and the appropriate fields are highlighted in red. If all conditions are met, the password is encrypted using a custom function, and a SQL query is executed to insert the user's email, username, and encrypted password into the database. A success message is displayed in a pop-up dialog, and the user is redirected to the login screen. Finally, the "out" variable is checked again, and if it contains an error message, it is displayed in the dialog.
 
 **Log in (w/ Validation)**
 ```pycon
-
+    def try_login(self):
+        uname = self.ids.uname.text
+        passwd = self.ids.passwd.text
+        MainScreen.user1 = self.ids.uname.text
+        query = f"SELECT * from users where uname='{uname}' or email='{uname}'"
+        db = database_handler(namedb="spentio.db")
+        result = db.search(query)
+        if uname=="" or passwd=="":
+            self.dialog = MDDialog(text="Please enter required fields")
+        elif len(result)==1:
+            email,uname,hashed = result[0]
+            if check_password(passwd,hashed)==True:
+                self.dialog = MDDialog(text="Successfully logged in.")
+                self.dialog.open()
+                self.parent.current="MainScreen"
+            else:
+                self.dialog = MDDialog(text="Incorrect Password. Try again.")
+        else:
+            self.dialog = MDDialog(text="User does not exist. Try again.")
+        db.close()
+        self.dialog.open()
+        self.ids.uname.text = ''
+        self.ids.passwd.text=''
 ```
+This code defines the try_login function which is called when the user tries to log in to the application. It first retrieves the username and password entered by the user from the corresponding input fields in the GUI. It then sets the user1 attribute of the MainScreen class to the entered username.
+
+Next, it constructs an SQL query to retrieve the user information from the users table in the spentio.db database. The query searches for a row in the users table where the entered username or email matches either the uname or email columns, respectively. The database_handler function is used to connect to and execute the query on the database.
+
+If either the username or password input fields are empty, the function creates a dialog box informing the user to fill in both fields.
+
+If a row is found that matches the entered username or email, the function retrieves the email, username, and hashed password from the query result. The check_password function is then used to check if the entered password matches the stored hashed password. If the password matches, a dialog box is created informing the user that they have successfully logged in, and the GUI is changed to the MainScreen. If the password does not match, a dialog box is created informing the user to try again with the correct password.
+
+If no row is found in the users table that matches the entered username or email, a dialog box is created informing the user that the user does not exist and to try again with a valid username or email.
+
+
 **Add Entry**
 ```pycon
+#---A. SAVE ENTRY---
+    def save_popup(self):
+        self.save_dialog = MDDialog(
+            title='Add entry',
+            type='custom',
+            content_cls=Content(),
+            buttons=[
+                MDFlatButton(
+                    text='CANCEL',
+                    on_release=self.close_dialog
+                ),
+                MDFlatButton(
+                    text='OK',
+                    on_release=self.save
+                )
+            ]
+        )
+        self.save_dialog.open()
+        if self.save_dialog.content_cls.ids.int_input.text.isdigit()!=True:
+            self.save_dialog.content_cls.ids.int_input.error=True
+            self.save_dialog.content_cls.ids.int_input.helper_text="Please enter a number."
+    def save(self,*args):
+        integer = self.save_dialog.content_cls.ids.int_input.text
+        category = self.category
+        if self.save_dialog.content_cls.ids.int_input.text.isdigit()!=True:
+            self.popup = MDDialog(text="Please enter an integer.")
+            self.popup.open()
+        else:
+            date_time = datetime.fromtimestamp(time.time())
+            str_date = date_time.strftime("%d %B, %Y")
+            print(integer,'\n\n',type(integer))
+            db = database_handler("spentio.db")
+            query = f"INSERT into ledger (date, category, jpy,brz,user) VALUES('{str_date}','{category}',{int(integer)},{round(int(integer)*.038,2)},'{self.user1}')"
+            db.run_query(query)
+            db.close()
 
+        self.save_dialog.dismiss()
+        self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
 ```
+This code implements the functionality to save an entry in a database. It has two main functions: save_popup and save.
+
+The save_popup function creates a custom dialog box with a title "Add entry", a content class Content (which defines the structure of the form in the dialog box), and two buttons "CANCEL" and "OK". When the "OK" button is clicked, it calls the save function to insert the data into the database.
+
+The save function retrieves the data entered in the form by the user and checks whether the input is an integer or not. If the input is not an integer, it displays a dialog box with an error message "Please enter an integer". If the input is valid, it retrieves the current date and time, formats it to a string, and inserts the entry into the database using an SQL query.
+
+The SQL query inserts the date, category, jpy, brz, and user into the ledger table in the database. The jpy column value is the integer entered by the user, and the brz column value is calculated by multiplying the jpy value by 0.038 and rounding it to two decimal places. The user value is obtained from the class attribute self.user1.
+
+Finally, the function dismisses the dialog box and updates the display of the data table by calling the update function with an SQL query that retrieves all the entries for the current user.
+
+
+
+
 
 **Edit Entry**
 ```pycon
-
+#---C.EDIT ENTRY ---
+    def edit_trig(self):
+        checked_rows = self.data_table.get_row_checks()
+        if len(checked_rows)>1:
+            self.popup = MDDialog(text="Please pick one entry at a time to edit.")
+            self.popup.open()
+        elif len(checked_rows) ==1:
+            self.id_edit = checked_rows[0][0]
+            self.edit_dialog = MDDialog(
+                title='Edit entry',
+                type='custom',
+                content_cls=Content(),
+                buttons=[
+                    MDFlatButton(
+                        text='CANCEL',
+                        on_release=self.close_dialog_1
+                    ),
+                    MDFlatButton(
+                        text='OK',
+                        on_release=self.edit_entry
+                    )
+                ]
+            )
+            self.edit_dialog.open()
+    def edit_entry(self,*args):
+        integer = self.edit_dialog.content_cls.ids.int_input.text
+        category = self.category
+        if self.edit_dialog.content_cls.ids.int_input.text.isdigit()!=True:
+            self.popup = MDDialog(text="Please enter an integer.")
+            self.popup.open()
+        else:
+            db = database_handler("spentio.db")
+            query = f"UPDATE ledger set category='{category}',jpy={int(integer)},brz={int(integer)*.038} where id={self.id_edit} and user='{self.user1}'"
+            db.run_query(query)
+            db.close()
+            self.edit_dialog.dismiss()
+            self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
 ```
+This code defines two methods edit_trig() and edit_entry() which are used to edit an entry in a ledger. When edit_trig() is called, it first checks if only one row is selected in a data table. If multiple rows are selected, it displays an error message, otherwise, it opens a dialog box named edit_dialog. This dialog box contains a custom content layout and two buttons named CANCEL and OK. When OK is clicked, it calls the edit_entry() method. This method updates the database with the new data that was entered in the edit_dialog and then dismisses the dialog box. Finally, it updates the data table with the new data.
+
 
 **Delete Entry**
 ```pycon
-
+# ---B. DELETE ENTRY---
+    def delete(self):
+        checked_rows = self.data_table.get_row_checks()
+        print(checked_rows)
+        db = database_handler("spentio.db")
+        for r in checked_rows:
+            id=r[0]
+            query = f"DELETE from ledger where id={id}"
+            db.run_query(query)
+        db.close()
+        self.update(f"SELECT id,Date,Category,jpy,brz from ledger where user='{self.user1}'")
 ```
+This code implements the logic for deleting entries from a database table.  First, it retrieves the checked rows from the data table by calling self.data_table.get_row_checks() and stores them in the checked_rows variable.  Then, it creates a database_handler object with the database file name "spentio.db".  Next, it loops over each row in the checked_rows list using a for loop, retrieves the id of the row by indexing the first element, and constructs a SQL query to delete the row with that id from the "ledger" table in the database. The query is constructed using f-strings, where the value of id is inserted into the query string. 
+
+The run_query() method of the database_handler object is then called with the query string as an argument to execute the delete operation on the database.  After all the rows have been deleted, the database is closed by calling the close() method of the database_handler object.  Finally, the update() method is called with a SELECT query string to refresh the data table with the updated entries from the database.
+
 
 **Log out**
 ```pycon
-
+#---LOG OUT___
+    def logout_popup(self):
+        self.popup = MDDialog(text="Are you sure you want to exit?",buttons=[MDFlatButton(text='No',on_release=self.close_popup_logout),MDFlatButton(text='Yes',on_release=self.logout)])
+        self.popup.open()
+    def logout(self,obj):
+        self.popup.dismiss()
+        self.parent.current='LoginScreen'
 ```
-
+This code defines two methods logout_popup() and logout() in a class.  The logout_popup() method creates an instance of MDDialog with a text message and two buttons. When the user clicks on the "Yes" button, the logout() method is called and when the user clicks on the "No" button, the dialog is closed by calling close_popup_logout() method.  The logout() method dismisses the popup dialog and sets the current screen of the parent widget to "LoginScreen". This implies that when the user clicks the "Yes" button in the dialog, the app will be directed to the LoginScreen.
 
 
 ## References
