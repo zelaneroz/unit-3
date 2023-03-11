@@ -62,14 +62,21 @@ Figure 4 shows the different entities involved in the app's database and how the
 ### Flowcharts
 **Registration System**
 
+![](src/media/fc_2.png)
+
 *Fig 5. Flowchart of the spent.io app entry editing algorithm*
 
 
-**Add Entry**
+**Delete Entry** 
 
-*Fig 6. Flowchart of the spent.io app entry addition algorithm*
+
+![](src/media/fc_3.jpg)
+
+
+*Fig 6. Flowchart of the spent.io app entry deletion algorithm*
 
 **Entry Editing**
+
 ![](src/media/fc_1.jpg)
 
 *Fig 7. Flowchart of the spent.io app entry editing algorithm*
