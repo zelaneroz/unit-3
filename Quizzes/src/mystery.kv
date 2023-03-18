@@ -24,7 +24,9 @@ ScreenManager:
                     root.message1()
             MDRaisedButton:
                 text: "Next Page"
-                on_press: root.parent.current="MysteryPageB"
+                on_press:
+                    text: ""
+                    root.parent.current="MysteryPageB"
 
 <MysteryPageB>:
     MDBoxLayout:
@@ -45,5 +47,7 @@ ScreenManager:
                 on_press:
                     root.message2()
             MDRaisedButton:
-                text: "Previous Page"
-                on_press: root.parent.current="MysteryPageA"
+                text: "Next Page"
+                on_press:
+                    textb.text: ""
+                    root.parent.current="MysteryPageA"

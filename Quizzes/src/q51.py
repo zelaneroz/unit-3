@@ -1,7 +1,6 @@
 class Wheel:
-    def __init__(self,wheel_size:int,frame_material:str):
+    def __init__(self,wheel_size:int):
         self.size = wheel_size*2.54
-        self.material = frame_material
     def get_size(self):
         return f"{self.size} cm"
     def get_perimeter(self):
@@ -12,13 +11,13 @@ class Wheel:
 
     pass
 class Bicycle:
-    def __init__(self,size,frame_material):
-        self.obj1 = Wheel(size,frame_material)
+    def __init__(self,size:int,frame_material):
+        self.material =frame_material
+        self.wheel = Wheel(size)
     def ride(self):
-        return f"Bicycle Wheel Size: {self.obj1.size}\nBicycle Wheel Material: {self.obj1.material}"
+        return f"Bicycle Wheel Size: {self.wheel.size}\nBicycle Wheel Material: {self.material}"
         #print wheel size & frame material
 
-test = Wheel(26,'aluminum')
-print(Bicycle().ride(26,'aluminum'))
-#Create an object with a wheel size 26 and frame aluminum
-#How many kilometer per rotation do you get on that wheel?
+test=Bicycle(26,'aluminum')
+print(test.ride())
+print(test.wheel.get_km_per_rotation())

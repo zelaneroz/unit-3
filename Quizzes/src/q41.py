@@ -12,12 +12,14 @@ class q41(MDApp):
     def press(self, btn):
         if self.turn=='X':
             btn.text = "X"
+            btn.color_disabled=(252, 186, 3)
+            btn.md_bg_color_disabled= [0, 0, 102, 100]
             btn.disabled = True
-            btn.color_disabled=252, 186, 3
             self.root.ids.player.text = "It is O's turn!"
             self.turn = 'O'
         else:
             btn.text = "O"
+            btn.md_bg_color_disabled= [102, 0, 102, 100]
             btn.disabled = True
             self.root.ids.player.text = "It is X's turn!"
             self.turn = 'X'

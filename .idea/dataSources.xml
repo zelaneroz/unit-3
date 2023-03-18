@@ -8,13 +8,6 @@
       <jdbc-url>jdbc:sqlite:my_first_db.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="q43.db" uuid="20f343ef-c74e-4b39-9143-7d254820a08c">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="my_first_db" uuid="89120bf9-6475-4395-bd9e-fa1532923961">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
@@ -77,11 +70,11 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Project/src/spentio.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="q46.db" uuid="c5f05817-08fb-4491-987b-56127d1c4e38">
+    <data-source source="LOCAL" name="q43.db" uuid="a43d1edd-4364-427f-a267-4883e762be14">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Quizzes/src/q46</jdbc-url>
+      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
