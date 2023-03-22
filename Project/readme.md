@@ -16,7 +16,7 @@ The proposed solution is an expense tracking application that allows users to ke
 
 The app includes a login & register system to provide an added layer of security by ensuring that only authorized users can access the app and its data. It also ensures that the user's data is private and personal to the authorized user, protecting sensitive information such as financial data, personal details, and transaction history. The user interface uses a color scheme that only includes colors in the shade of pink, as per request of the client. The interface is clear, concise, and attractive, making it easy for users to navigate and use the app. The app allows the user to add entries as the expense tracking app's basic functionality. In addition, it allows users to edit and delete entries just in case the user inputs an entry wrongly the first time.
 
-The developer shall use Python, a popular programming language widely used in the development of web applications, scientific computing, and data analysis[1]. The developer chose Python as it is a versatile language that is easy to learn and has a large community of developers who contribute to its development. Along with Python is kivyMD, a Python-based library use for developing user interfaces. The developer chose kivyMD because it is open source and it is a popular choice for app development among the Python developers community, due to its apparent simplicity, flexibility, and scalability. kivyMD provides a wide range of widgets, animations, and effects, making it easy to develop attractive and responsive user interfaces[2]. Lastly, SQLite is chosen for the application's database management system due to its simplicity, reliability, and portability. SQLite offers a lightweight database management system and can be integrated with Python. SQLite is also scalable, meaning it can handle large amounts of data and is suitable for developing an expense tracking app. It is self-contained thus a separate server is not required.
+The developer shall use Python, a popular programming language widely used in the development of web applications, scientific computing, and data analysis. The developer chose Python as it is a versatile language that is easy to learn and has a large community of developers who contribute to its development. Along with Python is kivyMD, a Python-based library use for developing user interfaces. The developer chose kivyMD because it is open source and it is a popular choice for app development among the Python developers community, due to its apparent simplicity, flexibility, and scalability. kivyMD provides a wide range of widgets, animations, and effects, making it easy to develop attractive and responsive user interfaces[2]. Lastly, SQLite is chosen for the application's database management system due to its simplicity, reliability, and portability. SQLite offers a lightweight database management system and can be integrated with Python. SQLite is also scalable, meaning it can handle large amounts of data and is suitable for developing an expense tracking app. It is self-contained thus a separate server is not required.
 
 In summary, the proposed solution is an expense tracking app that is necessary for people who want to stay on top of their finances. The app includes a login system, a database management system, a user interface, expense tracking, encryption, and personalization. Python, kivyMD, and SQLite are the best choices for developing the app because of their simplicity, flexibility, and reliability.
 
@@ -249,8 +249,6 @@ The encrypt_password function takes a user's password as input and returns an en
 The check_password function takes a user's password and the hashed password stored in the database as input. It uses the CryptContext object to verify that the user's password matches the stored hashed password.
 
 
-
-
 **Register (w/ Validation)**
 ```pycon
     def try_register(self):
@@ -462,17 +460,383 @@ The run_query() method of the database_handler object is then called with the qu
 This code defines two methods logout_popup() and logout() in a class.  The logout_popup() method creates an instance of MDDialog with a text message and two buttons. When the user clicks on the "Yes" button, the logout() method is called and when the user clicks on the "No" button, the dialog is closed by calling close_popup_logout() method.  The logout() method dismisses the popup dialog and sets the current screen of the parent widget to "LoginScreen". This implies that when the user clicks the "Yes" button in the dialog, the app will be directed to the LoginScreen.
 
 
+## Computational Thinking - .kv
+**Screen Manager**
+```.kv
+ScreenManager:
+    LoginScreen:
+        name: "LoginScreen"
+    RegistrationScreen:
+        name: "RegistrationScreen"
+    MainScreen:
+        name: "MainScreen"
+```
+This KivyMD code defines a ScreenManager widget. ScreenManager in KivyMD is a widget that manages a collection of screens and provides a way to switch between them. It's used to create multiple screens or views in KivyMD applications, making it easy to organize and navigate different pages of content. In this case, the application's ScreenManager widget in its .kv file contains three screens with distinct names: LoginScreen, RegistrationScreen, and MainScreen.
+
+The LoginScreen is set to be the first screen shown when the app is launched with the name attribute of "LoginScreen".
+The RegistrationScreen has the name attribute of "RegistrationScreen".
+The MainScreen has the name attribute of "MainScreen".
+These three different screens can be navigated between by setting the current screen of the ScreenManager to the corresponding screen's name.
+
+The content of each of these screens and how they were developed are explain further in the following sections.
+
+**Login Screen**
+```.kv
+<LoginScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#FFF0EB"
+        Image:
+            source: 'media/logo3.png'
+            width: 50
+            allow_stretch: False
+            size_hint_y:.15
+            pos_hint: {"center_x":.5,"center_y":.2}
+        MDLabel:
+            text: 'spent.io'
+            size_hint_y:.25
+            bold: True
+            halign: "center"
+            font_size: "120px"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDCard:
+            size_hint: .7,.7
+            pos_hint: {"center_x":.5,"center_y":.5}
+            orientation: "vertical"
+            border_radius: 40
+            radius: [40]
+            MDBoxLayout:
+                orientation: "vertical"
+                pos_hint: {"center_x":.5,"center_y":.5}
+                MDLabel:
+                    text: "Welcome back!"
+                    halign: "left"
+                    text_color: "#F08DA9"
+                    bold: True
+                    size_hint_y:.2
+                    font_size: "50px"
+                    pos_hint: {"center_x":.55, "center_y":.5}
+                MDTextField:
+                    id:uname
+                    icon_left: "email"
+                    hint_text: "Enter username"
+                    size_hint: .7, .15
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDTextField:
+                    id: passwd
+                    icon_left: "key-variant"
+                    hint_text: "Enter password"
+                    password: True
+                    size_hint: .7,.15
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDLabel:
+                    text: ""
+                    size_hint_y:.15
+                MDFlatButton:
+                    text: "Sign in"
+                    md_bg_color:"#F08DA9"
+                    pos_hint: {"center_x":.5, "center_y":.2}
+                    size_hint: .3,.1
+                    on_press:
+                        root.try_login()
+                MDTextButton:
+                    text: "Don't have an account? Sign up here"
+                    custom_color: "#F08DA9"
+                    size_hint: 1, .25
+                    halign: "center"
+                    pos_hint: {"center_x":0.5,"center_y":.5}
+                    on_press: root.register_btn()
+```
+This KivyMD code defines a LoginScreen widget that uses multiple KivyMD widgets to build a login form.
+* There's an Image widget with the source of 'media/logo3.png' displayed at the top of the screen, followed by an MDLabel with the name of the app "spent.io" in bold and larger font size.
+* MDCard is used to create a card in the center of the screen for the login form, containing a MDLabel that says "Welcome back!" in pink text color and larger font size, followed by two MDTextField for the user to enter their username and password.
+* Below the MDTextField widgets, there's a space set by an MDLabel widget, followed by two buttons - an MDFlatButton with the text "Sign in" and a custom color, and an MDTextButton with the text "Don't have an account? Sign up here" that changes the content of the screen to registration page when pressed.
+* This LoginScreen also has a try_login() function that is called when the "Sign in" button is pressed and a register_btn() function that changes the current screen to the RegistrationScreen when the button containing "Don't have an account? Sign up here" is pressed.
+
+Overall, this code defines a visually appealing login form with KivyMD widgets that provide various functionality like hint text, icons, custom colors, and actions when a widget is pressed.
+
+**Registration Screen**
+``.kv
+<RegistrationScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#FFF0EB"
+        Image:
+            source: 'media/logo3.png'
+            width: 50
+            allow_stretch: False
+            size_hint_y:.15
+            pos_hint: {"center_x":.5,"center_y":.2}
+        MDLabel:
+            text: 'spent.io'
+            size_hint_y:.15
+            bold: True
+            halign: "center"
+            font_size: "120px"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDCard:
+            size_hint: .7,.7
+            pos_hint: {"center_x":.5,"center_y":.5}
+            orientation: "vertical"
+            border_radius: 40
+            radius: [40]
+            MDBoxLayout:
+                orientation: "vertical"
+                pos_hint: {"center_x":.5,"center_y":.5}
+                MDLabel:
+                    text: "Register new account"
+                    halign: "left"
+                    text_color: "#F08DA9"
+                    bold: True
+                    size_hint_y:.15
+                    font_size: "50px"
+                    pos_hint: {"center_x":.55, "center_y":.5}
+                MDTextField:
+                    id:uname
+                    hint_text: "Enter username"
+                    size_hint: .7, .1
+                    hint_font_size: "12px"
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDTextField:
+                    id: email
+                    hint_text: "Enter email"
+                    hint_font_size: "10px"
+                    size_hint: .7,.1
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDTextField:
+                    id:pass1
+                    hint_text: "Enter password"
+                    size_hint: .7, .1
+                    hint_font_size: "10px"
+                    password: True
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDTextField:
+                    id: pass2
+                    hint_text: "Confirm password"
+                    helper_text: "Password must be at least 8 characters long"
+                    helper_text_mode: "on_error"
+                    password: True
+                    size_hint: .7,.1
+                    hint_font_size: "12px"
+                    pos_hint: {"center_x":.5,"center_y":.5}
+                MDLabel:
+                    text: ""
+                    size_hint_y: .05
+                MDFlatButton:
+                    text: "Register"
+                    md_bg_color:"#F08DA9"
+                    pos_hint: {"center_x":.5, "center_y":.2}
+                    size_hint: .3,.05
+                    on_press: root.try_register()
+                MDTextButton:
+                    text: "Already have an account? Log in here"
+                    custom_color: "#F08DA9"
+                    size_hint: 1, .1
+                    halign: "center"
+                    pos_hint: {"center_x":0.5,"center_y":.5}
+                    on_press: root.login_btn()
+``
+The above KivyMD code defines a RegistrationScreen widget in which a user can register a new account. The layout of the widget is built with KivyMD widgets as follows:
+
+* An Image widget with the source of 'media/logo3.png' is displayed at the top of the screen, followed by an MDLabel with the name of the app "spent.io" in bold and larger font size.
+* An MDCard is used to create a card in the center of the screen for the registration form, containing an MDLabel that says "Register new account" in pink text color and larger font size, followed by four MDTextField widgets: username, email, password, and confirm password fields.
+* The password and confirm password fields protect the user's sensitive information by hiding what they type, as indicated by the password: True attribute in their MDTextField.
+* A helper text is added to the confirm password field that appears when the user types a password that is less than 8 characters long, guiding the user to use a longer password.
+* An MDFlatButton with the text "Register" and a custom background color is placed at the bottom of the card. When the user presses the button, the try_register() function is called to register the account.
+* An MDTextButton with the text "Already have an account? Log in here" is placed below the registration card to allow the user to switch back to the login screen. When clicked on, the login_btn() function is called and the current screen set to the LoginScreen.
+
+This RegistrationScreen is visually pleasing and makes use of various KivyMD widgets such as MDCard, MDLabel, MDTextField, MDFlatButton, and MDTextButton. The use of helper text for password validation and styling also improves the user experience of the registration form.
+
+
+**Main Screen**
+```.kv
+<MainScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#FFF0EB"
+        Image:
+            source: 'media/logo3.png'
+            width: 50
+            allow_stretch: False
+            size_hint_y:.15
+            pos_hint: {"center_x":.5,"center_y":.2}
+        MDLabel:
+            text: 'spent.io'
+            size_hint_y:.15
+            bold: True
+            halign: "center"
+            font_size: "120px"
+            pos_hint: {"center_x":.5,"center_y":.5}
+        MDLabel:
+            text: ""
+            size_hint_y:.55
+        MDBoxLayout:
+            size_hint_y: .15
+            orientation: 'horizontal'
+            pos_hint: {"center_x":.5,"center_y":.5}
+            MDIconButton:
+                pos_hint: {"center_x":.5,"center_y":.5}
+                icon: 'media/add.png'
+                icon_size: '60sp'
+                on_release: root.save_popup()
+            MDIconButton:
+                icon: 'media/edit.png'
+                icon_size: '60sp'
+                pos_hint: {"center_x":.5,"center_y":.5}
+                on_release: root.edit_trig()
+            MDIconButton:
+                icon: 'media/bin.png'
+                icon_size: '60sp'
+                pos_hint: {"center_x":.5,"center_y":.5}
+                on_release: root.delete()
+            Spinner:
+                text: "View by Category"
+                id:spinner_id
+                size_hint_y: .3
+                sync_height: True
+                sync_width: True
+                background_color: "pink"
+                pos_hint: {"center_x":.5,"center_y":.5}
+                size: dp(60),dp(60)
+                values: ["Food","Transportation","Leisure","Emergency","Others","All"]
+                on_text: root.spinner_clicked(spinner_id.text)
+            MDIconButton:
+                icon: 'media/logout.png'
+                icon_size: '60sp'
+                pos_hint: {"center_x":.5,"center_y":.5}
+                on_release: root.logout_popup()
+```
+The above KivyMD code defines the MainScreen widget which displays a list of user transactions categorized into various categories. The layout is built with KivyMD widgets as follows:
+
+* An Image widget with the source of 'media/logo3.png' is displayed at the top of the screen, followed by an MDLabel with the name of the app "spent.io" in bold and larger font size.
+* An MDLabel is used to display the user transactions, which takes up most of the screen.
+* An MDBoxLayout with an orientation of horizontal is placed below the transaction list, and 5 MDIconButtons and a Spinner are added to it.
+* MDIconButtons are used to provide essential functionality to the user such as Add transaction, Edit existing transactions, Delete existing transactions, and Logout.
+* A Spinner widget is used with six categories (Food, Transportation, Leisure, Emergency, Others, or All) for user to categorize and filter their transactions by these categories.
+* Clicking on one of the categories in the Spinner calls the spinner_clicked(text) method that filters the transactions based on the chosen category.
+* Clicking on the Add, Edit, or Delete icon button calls the corresponding method (save_popup(), edit_trig(), delete()), allowing the user to perform these actions.
+* Clicking the logout icon button calls the logout_popup() method to log the user out of the application.
+
+Overall, this KivyMD code provides a user-friendly interface for an expense tracker app, allowing the user to view their transactions, categorize them, and perform essential actions like adding, editing, or deleting transactions in various categories. It also allows the user to log out of the app from the MainScreen.
+
+
+**Content**
+```.kv
+<Content>
+    spacing: "12dp"
+    size_hint_y: None
+    height: "150dp"
+
+    MDTextField:
+        id: int_input
+        hint_text: "Enter amount"
+        on_text_validate: root.set_error_message
+        on_focus: root.set_error_message
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint: 1,.8
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb1
+                group: 'group1'
+                pos_hint: {"center_y":.5}
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Food")
+            MDLabel:
+                text: 'Food'
+                font_size: "20px"
+                pos_hint: {"center_x":.5,"center_y":.5}
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb2
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Transportation")
+            MDLabel:
+                text: 'Transportation'
+                font_size: "20px"
+                pos_hint: {"center_x":.5,"center_y":.5}
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb3
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Leisure")
+            MDLabel:
+                text: 'Leisure'
+                font_size: "20px"
+                pos_hint: {"center_x":.5,"center_y":.5}
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb4
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Emergency")
+            MDLabel:
+                text: 'Emergency'
+                pos_hint: {"center_x":.5,"center_y":.5}
+                font_size: "20px"
+        MDBoxLayout:
+            orientation: "horizontal"
+            MDCheckbox:
+                id: cb5
+                pos_hint: {"center_y":.5}
+                group: 'group1'
+                size_hint: None, None
+                size: dp(35), dp(35)
+                active: True
+                on_active: root.categ_pressed("Others")
+            MDLabel:
+                text: 'Others'
+                pos_hint: {"center_x":.5,"center_y":.5}
+                font_size: "20px"
+```
+This KivyMD code defines a Content widget that appears inside a Popup widget, which is used to create a new transaction.
+
+* The content of the widget consists of two parts: an MDTextField to enter the transaction amount and a series of checkboxes and labels for the transaction category.
+* The MDTextField widget has an ID of int_input, with a hint_text of "Enter amount". When the user submits the amount (presses Enter key), the set_error_message() method is called to validate the entered text.
+* The checkboxes are used to categorize the transaction as "Food", "Transportation", "Leisure", "Emergency", or "Others". Each checkbox has an ID and is part of a group (group1) to limit the user to only select one category.
+* Each checkbox has an MDLabel widget next to it, displaying the name of the category.
+* When the user selects a checkbox, the corresponding categ_pressed(category) method is called with the selected category as the argument.
+
+Overall, this KivyMD code provides a visually appealing way for a user to create a new transaction with the amount and category widgets. The use of checkboxes ensures that only one category can be selected at a time.
+
+
 ## References
+# Sources
+[^1]: “Advantages of Python | Disadvantages of Python.” Python Geeks, 25 June 2021, pythongeeks.org/advantages-disadvantages-of-python/.
+[^2]: SQLite. “About SQLite.” Sqlite.org, 2019, www.sqlite.org/about.html.
+[^3]: “What Is Database Engine?” Computer Notes, 10 Apr. 2014, ecomputernotes.com/fundamental/what-is-a-database/database engine#:~:text=In%20a%20computer%20database%2C%20the. Accessed 8 Mar. 2023.
+[^4]: “What Is a Graphical User Interface (GUI)? - Definition from Techopedia.” Techopedia.com, 2019, www.techopedia.com/definition/5435/graphical-user-interface-gui.
+[^5]:
 
-[^1]: Python , "https://www.python.org/."
 
-[^2]: KivyMD , "https://kivymd.readthedocs.io/en/1.1.1/."
 
-[^3]: SQLite , "https://www.sqlite.org/index.html."
+Python , "https://www.python.org/."
 
-[^4]: Codemy , "https://www.youtube.com/watch?v=tToJBfDgCsc&ab_channel=Codemy.com".
+ KivyMD , "https://kivymd.readthedocs.io/en/1.1.1/."
 
-[^5]: Datetime , "https://docs.python.org/3/library/datetime.html"
+: SQLite , "https://www.sqlite.org/index.html."
+
+ Codemy , "https://www.youtube.com/watch?v=tToJBfDgCsc&ab_channel=Codemy.com".
+
+ Datetime , "https://docs.python.org/3/library/datetime.html"
 
 # Criteria D: Functionality
 ## Video
