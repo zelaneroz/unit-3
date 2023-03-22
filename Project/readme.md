@@ -9,14 +9,14 @@ Emmy Abella Domingues is an 18-year-old IB Year 1 student from Brazil. As an int
 The client, Emmy Domingues, is in need of an app that keeps track of her expenses. In addition, the client requires the app to be encrypted through a login system, for the data to be stored in a database, and for the user interface to be clear, concise, and most importantly attractive by using the client's favorite color, pink.
 
 ## Design Statement
-I will design and develop a digital expenses ledger for Emmy Abella Domingues da Silva who is struggling to keep track of her expenses as an international student. The proposed solution is an application programmed using the Python programming language, KivyMD for the Graphic User Interface (GUI) construction, and SQLite for local database[3]. The program will be developed and completed in a span of 4 weeks and will be evaluated based on the success criteria stated prior to this statement; the success criteria are objectives to be met by the developer approved by the client based on their needs and preferences.
+I will design and develop a digital expenses ledger for Emmy Abella Domingues da Silva who is struggling to keep track of her expenses as an international student. The proposed solution is an application programmed using the Python programming language, KivyMD for the Graphic User Interface (GUI) construction, and SQLite for local database[^1]. The program will be developed and completed in a span of 4 weeks and will be evaluated based on the success criteria stated prior to this statement; the success criteria are objectives to be met by the developer approved by the client based on their needs and preferences.
 
 ## Rationale for Proposed Solution
 The proposed solution is an expense tracking application that allows users to keep track of their expenses, categorize them into the client's main expenditure type (Food, Transportation, Emergency & Healthcare, Leisure, and Miscellaneous), and monitor their spending. The app is necessary for people who want to stay on top of their finances and make informed financial decisions. The app provides users with a comprehensive overview of their spending habits, which is crucial for budgeting, planning, and saving.
 
 The app includes a login & register system to provide an added layer of security by ensuring that only authorized users can access the app and its data. It also ensures that the user's data is private and personal to the authorized user, protecting sensitive information such as financial data, personal details, and transaction history. The user interface uses a color scheme that only includes colors in the shade of pink, as per request of the client. The interface is clear, concise, and attractive, making it easy for users to navigate and use the app. The app allows the user to add entries as the expense tracking app's basic functionality. In addition, it allows users to edit and delete entries just in case the user inputs an entry wrongly the first time.
 
-The developer shall use Python, a popular programming language widely used in the development of web applications, scientific computing, and data analysis. The developer chose Python as it is a versatile language that is easy to learn and has a large community of developers who contribute to its development. Along with Python is kivyMD, a Python-based library use for developing user interfaces. The developer chose kivyMD because it is open source and it is a popular choice for app development among the Python developers community, due to its apparent simplicity, flexibility, and scalability. kivyMD provides a wide range of widgets, animations, and effects, making it easy to develop attractive and responsive user interfaces[2]. Lastly, SQLite is chosen for the application's database management system due to its simplicity, reliability, and portability. SQLite offers a lightweight database management system and can be integrated with Python. SQLite is also scalable, meaning it can handle large amounts of data and is suitable for developing an expense tracking app. It is self-contained thus a separate server is not required.
+The developer shall use Python, a popular programming language widely used in the development of web applications, scientific computing, and data analysis[^1]. The developer chose Python as it is a versatile language that is easy to learn and has a large community of developers who contribute to its development. Along with Python is kivyMD, a Python-based library use for developing user interfaces[^2]. The developer chose kivyMD because it is open source and it is a popular choice for app development among the Python developers community, due to its apparent simplicity, flexibility, and scalability. kivyMD provides a wide range of widgets, animations, and effects, making it easy to develop attractive and responsive user interfaces[^4]. Lastly, SQLite is chosen for the application's database management system due to its simplicity, reliability, and portability. SQLite offers a lightweight database management system and can be integrated with Python[^3]. SQLite is also scalable, meaning it can handle large amounts of data and is suitable for developing an expense tracking app. It is self-contained thus a separate server is not required[^3].
 
 In summary, the proposed solution is an expense tracking app that is necessary for people who want to stay on top of their finances. The app includes a login system, a database management system, a user interface, expense tracking, encryption, and personalization. Python, kivyMD, and SQLite are the best choices for developing the app because of their simplicity, flexibility, and reliability.
 
@@ -818,27 +818,17 @@ This KivyMD code defines a Content widget that appears inside a Popup widget, wh
 Overall, this KivyMD code provides a visually appealing way for a user to create a new transaction with the amount and category widgets. The use of checkboxes ensures that only one category can be selected at a time.
 
 
-## References
-# Sources
-[^1]: “Advantages of Python | Disadvantages of Python.” Python Geeks, 25 June 2021, pythongeeks.org/advantages-disadvantages-of-python/.
-[^2]: SQLite. “About SQLite.” Sqlite.org, 2019, www.sqlite.org/about.html.
-[^3]: “What Is Database Engine?” Computer Notes, 10 Apr. 2014, ecomputernotes.com/fundamental/what-is-a-database/database engine#:~:text=In%20a%20computer%20database%2C%20the. Accessed 8 Mar. 2023.
-[^4]: “What Is a Graphical User Interface (GUI)? - Definition from Techopedia.” Techopedia.com, 2019, www.techopedia.com/definition/5435/graphical-user-interface-gui.
-[^5]:
+[^1]: Python , https://www.python.org/.
+[^2]: KivyMD , https://kivymd.readthedocs.io/en/1.1.1/.
+[^3]: SQLite. “About SQLite.” Sqlite.org, 2019, www.sqlite.org/about.html.
+[^4]: Codemy, https://www.youtube.com/watch?v=tToJBfDgCsc&ab_channel=Codemy.com.
+[^5]: Datetime, https://docs.python.org/3/library/datetime.html
 
 
-
-Python , "https://www.python.org/."
-
- KivyMD , "https://kivymd.readthedocs.io/en/1.1.1/."
-
-: SQLite , "https://www.sqlite.org/index.html."
-
- Codemy , "https://www.youtube.com/watch?v=tToJBfDgCsc&ab_channel=Codemy.com".
-
- Datetime , "https://docs.python.org/3/library/datetime.html"
 
 # Criteria D: Functionality
 ## Video
 https://drive.google.com/file/d/1zlYApceWcf5DnEFbrumAMSg-eP5M6G76/view?usp=sharing 
 
+
+# Sources
